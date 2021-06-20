@@ -39,26 +39,22 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const [typeError, setTypeError] = useState(false);
 
   const handleChanges = (file: File) => {
+    const fileType: string = file.type;
+    const extensionIndex: number = fileType.lastIndexOf("/");
+    const extension: string = fileType.substring(extensionIndex + 1);
+    const loweredTypes = types.map(type => type.toLowerCase());
+
+    if (!loweredTypes.includes(extension)) {
+      setTypeError(true);
+      return;
+    }
+
     handleChange(file);
     setFile(file);
     setUploaded(true);
   };
   const handleInputChange = (ev: any) => {
-    const file = ev.target.files[0];
-    const fileType: string = file.type;
-    const extensionIndex: number = fileType.lastIndexOf("/");
-    const extension: string = fileType.substring(extensionIndex + 1);
-    const loweredTypes = types.map(type => type.toLowerCase());
-    
-    if (!loweredTypes.includes(extension)) {
-      setTypeError(true);
-      return;
-    }
-    if (true) {
-      setTypeError(false);
-    }
-    handleChange(file);
-    setUploaded(true);
+    handleChanges(ev.target.files[0]);
   };
   const dragging = useDragging({ div, clickRef, handleChanges });
 
