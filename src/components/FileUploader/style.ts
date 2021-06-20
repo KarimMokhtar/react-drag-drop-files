@@ -1,12 +1,8 @@
 import styled from "styled-components";
-import theme from "../../styles/theme";
 
-type Colors = {
-  primary: string;
-  darkGray: string;
-  lightGray: string;
-};
-const { primary, darkGray, lightGray }: Colors = theme.colors;
+const primary = "#0658c2",
+  darkGray = "#666",
+  lightGray = "#999";
 export const UploaderWrapper = styled.label`
   display: flex;
   align-items: center;
@@ -41,13 +37,19 @@ export const HoverMsg = styled.div`
   }
 `;
 
-export const DescriptionWrapper = styled.div`
+export const DescriptionWrapper = styled.div<{ error: boolean }>`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
   & > span {
     font-size: 12px;
-    color: ${darkGray};
+    color: ${props => (props.error ? "red" : darkGray)};
+  }
+  .file-types{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
   }
 `;
 export const Description = styled.span`

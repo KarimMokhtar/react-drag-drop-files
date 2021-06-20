@@ -10,7 +10,7 @@
 Light and simple reactjs drag and drop library.
 
 
-##Demo
+## Demo
 
 [![Edit react-drag-drop-files](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-drag-drop-files-sghbp)
 ## Installation
@@ -37,7 +37,6 @@ function DragDrop() {
   };
   return (
     <FileUploader 
-        file={file} 
         handleChange={handleChange} 
         name="file" 
         types={fileTypes} 
@@ -49,10 +48,10 @@ export default DragDrop;
 ```
 ### Upcoming...
 
-- [ ] Files Validation
+- [X] Files Validation
 - [ ] Adding Multiple Files
 - [ ] Testing
-- [x] Typesscript Support
+- [X] Typesscript Support
 - [ ] Contribution Guide
 - [ ] Notify With Errors
 ## License
