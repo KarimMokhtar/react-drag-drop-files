@@ -37,7 +37,6 @@ function DragDrop() {
   };
   return (
     <FileUploader 
-        file={file} 
         handleChange={handleChange} 
         name="file" 
         types={fileTypes} 
