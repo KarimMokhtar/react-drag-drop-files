@@ -10,7 +10,7 @@
 Light and simple reactjs drag and drop library.
 
 
-##Demo
+## Demo
 
 [![Edit react-drag-drop-files](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-drag-drop-files-sghbp)
 ## Installation
