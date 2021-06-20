@@ -53,6 +53,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       handleChange(file);
       setFile(file);
       setUploaded(true);
+      setTypeError(false);
     }
   };
   const handleInputChange = (ev: any) => {
