@@ -49,10 +49,10 @@ export default DragDrop;
 ```
 ### Upcoming...
 
-- [ ] Files Validation
+- [X] Files Validation
 - [ ] Adding Multiple Files
 - [ ] Testing
-- [x] Typesscript Support
+- [X] Typesscript Support
 - [ ] Contribution Guide
 - [ ] Notify With Errors
 ## License

@@ -2,13 +2,12 @@ import React from "react";
 type Props = {
   types: Array<string>;
 };
-const DrawTypes = ({ types }: Props) => (
-  <span>
-    {types.map((type, index) => {
-      if (index === 0) return type;
-      if (index === types.length - 1) return `, or ${type}`;
-      return `, ${type}`;
-    })}
-  </span>
-);
+const DrawTypes = ({ types }: Props) => {
+  const stringTypes = types.toString();
+  return (
+    <span title={`It must be one of: ${stringTypes}`} className="file-types">
+      {stringTypes}
+    </span>
+  );
+};
 export default DrawTypes;

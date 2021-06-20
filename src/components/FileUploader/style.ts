@@ -37,13 +37,19 @@ export const HoverMsg = styled.div`
   }
 `;
 
-export const DescriptionWrapper = styled.div`
+export const DescriptionWrapper = styled.div<{ error: boolean }>`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
   & > span {
     font-size: 12px;
-    color: ${darkGray};
+    color: ${props => (props.error ? "red" : darkGray)};
+  }
+  .file-types{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
   }
 `;
 export const Description = styled.span`

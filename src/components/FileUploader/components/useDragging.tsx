@@ -4,10 +4,9 @@ let draggingCount = 0;
 type Params = {
   div: any;
   clickRef: any;
-  setUploaded: React.Dispatch<React.SetStateAction<boolean>>;
-  handleChange: (arg0: FileList | null) => void;
+  handleChanges: (arg0: File) => void;
 };
-const useDragging = ({ div, clickRef, setUploaded, handleChange }:Params) => {
+const useDragging = ({ div, clickRef, handleChanges }: Params) => {
   const [dragging, setDragging] = useState(false);
   const handleClick = useCallback(() => {
     clickRef.current.click();
@@ -39,12 +38,11 @@ const useDragging = ({ div, clickRef, setUploaded, handleChange }:Params) => {
       setDragging(false);
       draggingCount = 0;
       if (ev.dataTransfer.files && ev.dataTransfer.files.length > 0) {
-        handleChange(ev.dataTransfer.files[0]);
-        setUploaded(true);
+        handleChanges(ev.dataTransfer.files[0]);
         ev.dataTransfer.clearData();
       }
     },
-    [handleChange, setUploaded]
+    [handleChanges]
   );
   useEffect(() => {
     const ele = div.current;
