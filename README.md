@@ -1,4 +1,4 @@
-# React Drag and drop files
+# React Drag and Drop Files
 
 
 [![Version](http://img.shields.io/npm/v/react-drag-drop-files.svg)](https://www.npmjs.org/package/react-drag-drop-files) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![npm download][download-image]][download-url] 
