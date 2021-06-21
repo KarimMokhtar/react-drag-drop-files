@@ -46,6 +46,22 @@ function DragDrop() {
 
 export default DragDrop;
 ```
+
+## Options
+Option | Type | Description | value example
+--- | --- | --- | ---
+name | string | the name for your form (if exist) | myFile
+classes | string | string with the classes wished to add | drop_area drop_zone
+types | Array<strings> | array of strings with extentions to check and go throw | ['png', 'jpeg', ...]
+onTypeError | function | function that will be called only of error occured related to type | (err) => console.log(err)
+children | JSX Element, any | if you want to replace the current design inside the box of drop zone. | -  <div><p>this is inside drop area</p></div> or just text
+maxSize | number | the maximum size of the file (number in mb) | 2
+minSize | number | the minimum size of the file (number in mb) | 1
+onSizeError | function | function that will be called only of error occured related to size min or max | (err) => console.log(err)
+onDrop | function | function that will be called when the user drop a file on the drop area only | (file) => console.log(file)
+onSelect | function | function that will be called when the user select a file on click the file area only | (file) => console.log(file)
+handleChange | function | function that will be called when the user select or drop a file | (file) => console.log(file)
+
 ### Upcoming...
 
 - [x] Files Validation
@@ -53,6 +69,6 @@ export default DragDrop;
 - [ ] Testing
 - [x] Typescript Support
 - [ ] Contribution Guide
-- [ ] Notify With Errors
+- [x] Show different type of Errors
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
