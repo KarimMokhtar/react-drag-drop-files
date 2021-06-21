@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  children: JSX.Element | null;
+  children: JSX.Element | null | JSX.Element[];
   condition: boolean;
 };
 const IfComponent: React.FC<Props> = ({ children, condition }): JSX.Element | null => {

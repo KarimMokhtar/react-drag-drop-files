@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 
 import DrawTypes from "./components/DrawTypes";
 import IfComponent from "../../helpers/IfComponent/IfComponent";
@@ -8,13 +8,17 @@ import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./st
 
 type Props = {
   name: string;
-  types: Array<string>;
+  types?: Array<string>;
+  classes?: string;
+  children?: JSX.Element;
+  maxSize?: number;
+  minSize?: number;
   handleChange: (arg0: File) => void;
 };
 
 const drawDecription = (file: File | null, uploaded: boolean, typeError: boolean) => {
   return typeError ? (
-    <span>File type error, Hovered on types!</span>
+    <span>File type/size error, Hovered on types!</span>
   ) : (
     <Description>
       {!file && !uploaded ? (
@@ -30,30 +34,44 @@ const drawDecription = (file: File | null, uploaded: boolean, typeError: boolean
   );
 };
 
+const checkType = (file: File, types: Array<string>): boolean => {
+  const fileType: string = file.type.toLocaleLowerCase();
+  const extensionIndex: number = fileType.lastIndexOf("/");
+  const extension: string = fileType.substring(extensionIndex + 1);
+  const loweredTypes = types.map(type => type.toLowerCase());
+  return loweredTypes.includes(extension);
+};
+const getFileSizeMB = (size: number): number => {
+  return size / 1024 / 1024;
+};
+
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
-  const { name, types, handleChange } = props;
+  const { name, types, handleChange, classes, children, maxSize, minSize } = props;
   const div = useRef<any>(null);
   const clickRef = useRef<any>(null);
   const [uploaded, setUploaded] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const [typeError, setTypeError] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChanges = (file: File) => {
     if (file) {
-      const fileType: string = file.type;
-      const extensionIndex: number = fileType.lastIndexOf("/");
-      const extension: string = fileType.substring(extensionIndex + 1);
-      const loweredTypes = types.map(type => type.toLowerCase());
-
-      if (!loweredTypes.includes(extension)) {
-        setTypeError(true);
+      if (types && !checkType(file, types)) {
+        // types included and type not in them
+        setError(true);
         return;
       }
-
+      if (maxSize && getFileSizeMB(file.size) > maxSize) {
+        setError(true);
+        return;
+      }
+      if (minSize && getFileSizeMB(file.size) < minSize) {
+        setError(true);
+        return;
+      }
       handleChange(file);
       setFile(file);
       setUploaded(true);
-      setTypeError(false);
+      setError(false);
     }
   };
   const handleInputChange = (ev: any) => {
@@ -62,18 +80,21 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const dragging = useDragging({ div, clickRef, handleChanges });
 
   return (
-    <UploaderWrapper ref={div} htmlFor={name}>
+    <UploaderWrapper className={classes} ref={div} htmlFor={name}>
       <input onChange={handleInputChange} ref={clickRef} type="file" name={name} />
       <IfComponent condition={dragging}>
         <HoverMsg>
           <span>Drop Here</span>
         </HoverMsg>
       </IfComponent>
-      <ImageAdd />
-      <DescriptionWrapper error={typeError}>
-        {drawDecription(file, uploaded, typeError)}
-        <DrawTypes types={types} />
-      </DescriptionWrapper>
+      <IfComponent condition={!children}>
+        <ImageAdd />
+        <DescriptionWrapper error={error}>
+          {drawDecription(file, uploaded, error)}
+          <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
+        </DescriptionWrapper>
+      </IfComponent>
+      {children}
     </UploaderWrapper>
   );
 };
