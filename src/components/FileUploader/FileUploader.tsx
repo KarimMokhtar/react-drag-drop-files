@@ -19,7 +19,7 @@ const drawDecription = (file: File | null, uploaded: boolean, typeError: boolean
     <Description>
       {!file && !uploaded ? (
         <>
-          <span>Upload</span> or drop an image right here
+          <span>Upload</span> or drop a file right here
         </>
       ) : (
         <>
