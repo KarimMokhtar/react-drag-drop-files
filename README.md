@@ -52,10 +52,10 @@ export default DragDrop;
 
 Option | Type | Description | value example
 --- | --- | --- | ---
-name | string | the name for your form (if exist) | myFile
-classes | string | string with the classes wished to add | drop_area drop_zone
-types | Array<strings> | array of strings with extentions to check and go throw | ['png', 'jpeg', ...]
-onTypeError | function | function that will be called only of error occured related to type | (err) => console.log(err)
+name | string | the name for your form (if exist) | ```"myFile"```
+classes | string | string with the classes wished to add | ```"drop_area drop_zone"```
+types | Array<strings> | array of strings with extentions to check and go throw | ```['png', 'jpeg', ...]```
+onTypeError | function | function that will be called only of error occured related to type | ```(err) => console.log(err)```
 children | JSX Element, any | if you want to replace the current design inside the box of drop zone. | ```<div><p>this is inside drop area</p></div>``` or just text
 maxSize | number | the maximum size of the file (number in mb) | 2
 minSize | number | the minimum size of the file (number in mb) | 1
