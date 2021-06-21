@@ -13,6 +13,11 @@ type Props = {
   children?: JSX.Element;
   maxSize?: number;
   minSize?: number;
+
+  onSizeError?: (arg0: string) => void;
+  onTypeError?: (arg0: string) => void;
+  onDrop?: (arg0: File) => void;
+  onSelect?: (arg0: File) => void;
   handleChange: (arg0: File) => void;
 };
 
@@ -46,38 +51,46 @@ const getFileSizeMB = (size: number): number => {
 };
 
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
-  const { name, types, handleChange, classes, children, maxSize, minSize } = props;
+  const { name, types, handleChange, classes, children, maxSize, minSize, onSizeError, onSelect, onDrop, onTypeError } =
+    props;
   const div = useRef<any>(null);
   const clickRef = useRef<any>(null);
   const [uploaded, setUploaded] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState(false);
 
-  const handleChanges = (file: File) => {
+  const handleChanges = (file: File): boolean => {
     if (file) {
       if (types && !checkType(file, types)) {
         // types included and type not in them
         setError(true);
-        return;
+        if (onTypeError) onTypeError("File type is not supported");
+        return false;
       }
       if (maxSize && getFileSizeMB(file.size) > maxSize) {
         setError(true);
-        return;
+        if (onSizeError) onSizeError("File size is too big");
+        return false;
       }
       if (minSize && getFileSizeMB(file.size) < minSize) {
         setError(true);
-        return;
+        if (onSizeError) onSizeError("File size is too small");
+        return false;
       }
       handleChange(file);
       setFile(file);
       setUploaded(true);
       setError(false);
+      return true;
     }
+    return false;
   };
   const handleInputChange = (ev: any) => {
-    handleChanges(ev.target.files[0]);
+    const file = ev.target.files[0];
+    const success = handleChanges(file);
+    if (onSelect && success) onSelect(file);
   };
-  const dragging = useDragging({ div, clickRef, handleChanges });
+  const dragging = useDragging({ div, clickRef, handleChanges, onDrop });
 
   return (
     <UploaderWrapper className={classes} ref={div} htmlFor={name}>
