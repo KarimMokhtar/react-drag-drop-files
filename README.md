@@ -51,7 +51,7 @@ export default DragDrop;
 - [x] Files Validation
 - [ ] Adding Multiple Files
 - [ ] Testing
-- [x] Typesscript Support
+- [x] Typescript Support
 - [ ] Contribution Guide
 - [ ] Notify With Errors
 ## License
