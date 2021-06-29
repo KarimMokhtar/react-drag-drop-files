@@ -7,8 +7,7 @@
 [download-url]: https://npmjs.org/package/react-drag-drop-files
 
 
-Light and simple reactjs drag and drop library.
-
+Light and simple reactjs drag and drop files library to use with very flexible options to change, so you put whatever the design you want for your drop-area. Users can drag and drop or even select the file anywhere in the window.
 
 ## Demo
 
@@ -20,6 +19,11 @@ Install it from npm (using [NPM](http://webpack.github.io/)).
 npm i --save react-drag-drop-files
 ```
 
+or:
+
+```bash
+yarn add react-drag-drop-files
+```
 
 ## Usage
 Using react hooks just as simple as:
@@ -68,8 +72,6 @@ handleChange | function | function that will be called when the user select or d
 
 - [x] Files Validation
 - [ ] Adding Multiple Files
-- [ ] Testing
-- [x] Typescript Support
 - [ ] Contribution Guide
 - [x] Show different type of Errors
 ## License

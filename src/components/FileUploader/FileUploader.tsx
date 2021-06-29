@@ -1,13 +1,12 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import DrawTypes from "./components/DrawTypes";
-import IfComponent from "../../helpers/IfComponent/IfComponent";
 import useDragging from "./components/useDragging";
 import ImageAdd from "./components/ImageAdd";
 import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
 
 type Props = {
-  name: string;
+  name?: string;
   types?: Array<string>;
   classes?: string;
   children?: JSX.Element;
@@ -18,7 +17,7 @@ type Props = {
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File) => void;
   onSelect?: (arg0: File) => void;
-  handleChange: (arg0: File) => void;
+  handleChange?: (arg0: File) => void;
 };
 
 const drawDecription = (file: File | null, uploaded: boolean, typeError: boolean) => {
@@ -77,7 +76,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         if (onSizeError) onSizeError("File size is too small");
         return false;
       }
-      handleChange(file);
+      if (handleChange) handleChange(file);
       setFile(file);
       setUploaded(true);
       setError(false);
@@ -95,18 +94,20 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <UploaderWrapper className={classes} ref={div} htmlFor={name}>
       <input onChange={handleInputChange} ref={clickRef} type="file" name={name} />
-      <IfComponent condition={dragging}>
+      {dragging && (
         <HoverMsg>
           <span>Drop Here</span>
         </HoverMsg>
-      </IfComponent>
-      <IfComponent condition={!children}>
-        <ImageAdd />
-        <DescriptionWrapper error={error}>
-          {drawDecription(file, uploaded, error)}
-          <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
-        </DescriptionWrapper>
-      </IfComponent>
+      )}
+      {!children && (
+        <>
+          <ImageAdd />
+          <DescriptionWrapper error={error}>
+            {drawDecription(file, uploaded, error)}
+            <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
+          </DescriptionWrapper>
+        </>
+      )}
       {children}
     </UploaderWrapper>
   );

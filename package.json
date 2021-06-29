@@ -1,6 +1,6 @@
 {
   "name": "react-drag-drop-files",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "private": false,
   "description": "Light React Drag & Drop files and images library styled by styled-components",
   "main": "dist/index.cjs.js",
