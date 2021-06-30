@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 
-import DrawTypes from "./components/DrawTypes";
-import useDragging from "./components/useDragging";
-import ImageAdd from "./components/ImageAdd";
+import DrawTypes from "./DrawTypes";
+import useDragging from "./useDragging";
+import ImageAdd from "./ImageAdd";
 import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
 
 type Props = {
