@@ -1,3 +1,6 @@
 /playground
 /src
 .gitignore
+.babelrc
+tsconfig*
+rollup*
