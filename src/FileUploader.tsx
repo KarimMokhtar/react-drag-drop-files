@@ -46,7 +46,7 @@ const checkType = (file: File, types: Array<string>): boolean => {
   return loweredTypes.includes(extension);
 };
 const getFileSizeMB = (size: number): number => {
-  return size / 1024 / 1024;
+  return size / 1000 / 1000;
 };
 
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
