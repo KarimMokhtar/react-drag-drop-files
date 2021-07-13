@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
@@ -12,7 +12,7 @@ type Props = {
   children?: JSX.Element;
   maxSize?: number;
   minSize?: number;
-
+  file?: File | null;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File) => void;
@@ -20,12 +20,12 @@ type Props = {
   handleChange?: (arg0: File) => void;
 };
 
-const drawDecription = (file: File | null, uploaded: boolean, typeError: boolean) => {
+const drawDecription = (currFile: File | null, uploaded: boolean, typeError: boolean) => {
   return typeError ? (
     <span>File type/size error, Hovered on types!</span>
   ) : (
     <Description>
-      {!file && !uploaded ? (
+      {!currFile && !uploaded ? (
         <>
           <span>Upload</span> or drop a file right here
         </>
@@ -50,12 +50,24 @@ const getFileSizeMB = (size: number): number => {
 };
 
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
-  const { name, types, handleChange, classes, children, maxSize, minSize, onSizeError, onSelect, onDrop, onTypeError } =
-    props;
+  const {
+    name,
+    types,
+    handleChange,
+    classes,
+    children,
+    maxSize,
+    minSize,
+    file,
+    onSizeError,
+    onSelect,
+    onDrop,
+    onTypeError,
+  } = props;
   const div = useRef<any>(null);
   const clickRef = useRef<any>(null);
   const [uploaded, setUploaded] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+  const [currFile, setFile] = useState<File | null>(null);
   const [error, setError] = useState(false);
 
   const handleChanges = (file: File): boolean => {
@@ -91,6 +103,12 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   };
   const dragging = useDragging({ div, clickRef, handleChanges, onDrop });
 
+  useEffect(() => {
+    if (!file) {
+      setFile(null);
+      setUploaded(false);
+    }
+  }, [file]);
   return (
     <UploaderWrapper className={classes} ref={div} htmlFor={name}>
       <input onChange={handleInputChange} ref={clickRef} type="file" name={name} />
@@ -103,7 +121,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         <>
           <ImageAdd />
           <DescriptionWrapper error={error}>
-            {drawDecription(file, uploaded, error)}
+            {drawDecription(currFile, uploaded, error)}
             <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
           </DescriptionWrapper>
         </>
