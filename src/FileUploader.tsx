@@ -104,9 +104,12 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const dragging = useDragging({ div, clickRef, handleChanges, onDrop });
 
   useEffect(() => {
-    if (!file) {
-      setFile(null);
+    if (file) {
+      setUploaded(true);
+      setFile(file);
+    } else {
       setUploaded(false);
+      setFile(null);
     }
   }, [file]);
   return (
