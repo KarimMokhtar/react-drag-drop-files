@@ -1,6 +1,6 @@
 {
   "name": "react-drag-drop-files",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "description": "Light React Drag & Drop files and images library styled by styled-components",
   "author": "Karim <karimmokhtar28@gmail.com>",
   "license": "MIT",
@@ -81,6 +81,7 @@
     "rollup": "^2.52.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.3.4",
     "web-vitals": "^1.1.2"

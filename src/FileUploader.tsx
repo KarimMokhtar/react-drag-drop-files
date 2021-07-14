@@ -100,6 +100,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     const file = ev.target.files[0];
     const success = handleChanges(file);
     if (onSelect && success) onSelect(file);
+    ev.target.value = null;
   };
   const dragging = useDragging({ div, clickRef, handleChanges, onDrop });
 
