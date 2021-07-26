@@ -7,6 +7,7 @@ import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./st
 
 type Props = {
   name?: string;
+  hoverTitle?: string;
   types?: Array<string>;
   classes?: string;
   children?: JSX.Element;
@@ -52,6 +53,7 @@ const getFileSizeMB = (size: number): number => {
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const {
     name,
+    hoverTitle,
     types,
     handleChange,
     classes,
@@ -118,7 +120,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       <input onChange={handleInputChange} ref={clickRef} type="file" name={name} />
       {dragging && (
         <HoverMsg>
-          <span>Drop Here</span>
+          <span>{hoverTitle || "Drop Here"}</span>
         </HoverMsg>
       )}
       {!children && (
