@@ -1,10 +1,16 @@
-import React from "react";
 type Props = {
   types?: Array<string>;
   minSize?: number;
   maxSize?: number;
 };
-const DrawTypes = ({ types, minSize, maxSize }: Props) => {
+/**
+ * Draw the types and sizes restrictions for the uploading.
+ * @param {Object} fileData file data types, minSize, maxSize
+ * @returns JSX Element | null
+ *
+ * @internal
+ */
+export default function DrawTypes({ types, minSize, maxSize }: Props) {
   if (types) {
     const stringTypes = types.toString();
     let size = "";
@@ -17,5 +23,4 @@ const DrawTypes = ({ types, minSize, maxSize }: Props) => {
     );
   }
   return null;
-};
-export default DrawTypes;
+}

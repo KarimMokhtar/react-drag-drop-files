@@ -3,6 +3,10 @@ import styled from "styled-components";
 const primary = "#0658c2",
   darkGray = "#666",
   lightGray = "#999";
+/**
+ *
+ * @internal
+ */
 export const UploaderWrapper = styled.label`
   display: flex;
   align-items: center;
@@ -18,7 +22,10 @@ export const UploaderWrapper = styled.label`
     display: none;
   }
 `;
-
+/**
+ *
+ * @internal
+ */
 export const HoverMsg = styled.div`
   border: dashed 2px ${darkGray};
   border-radius: 5px;
@@ -36,7 +43,10 @@ export const HoverMsg = styled.div`
     transform: translateX(-50%) translateY(-50%);
   }
 `;
-
+/**
+ *
+ * @internal
+ */
 export const DescriptionWrapper = styled.div<{ error: boolean }>`
   display: flex;
   justify-content: space-between;
@@ -45,13 +55,17 @@ export const DescriptionWrapper = styled.div<{ error: boolean }>`
     font-size: 12px;
     color: ${props => (props.error ? "red" : darkGray)};
   }
-  .file-types{
+  .file-types {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 100px;
   }
 `;
+/**
+ *
+ * @internal
+ */
 export const Description = styled.span`
   font-size: 14px;
   color: ${darkGray};
