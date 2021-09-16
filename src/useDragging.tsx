@@ -7,7 +7,15 @@ type Params = {
   handleChanges: (arg0: File) => void;
   onDrop?: (arg0: File) => void;
 };
-const useDragging = ({ div, clickRef, handleChanges, onDrop }: Params) => {
+
+/**
+ * 
+ * @param param0 
+ * @returns 
+ * 
+ * @internal
+ */
+export default function useDragging({ div, clickRef, handleChanges, onDrop }: Params) {
   const [dragging, setDragging] = useState(false);
   const handleClick = useCallback(() => {
     clickRef.current.click();
@@ -65,6 +73,4 @@ const useDragging = ({ div, clickRef, handleChanges, onDrop }: Params) => {
   }, [handleClick, handleDragIn, handleDragOut, handleDrag, handleDrop, div]);
 
   return dragging;
-};
-
-export default useDragging;
+}

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
@@ -20,7 +20,17 @@ type Props = {
   onSelect?: (arg0: File) => void;
   handleChange?: (arg0: File) => void;
 };
-
+/**
+ *
+ * Draw a description on the frame
+ * @param currFile - The uploaded file
+ * @param uploaded - boolean to check if the file uploaded or not yet
+ * @param typeError - boolean to check if the file has type errors
+ * @returns JSX Element
+ *
+ * @internal
+ *
+ */
 const drawDecription = (currFile: File | null, uploaded: boolean, typeError: boolean) => {
   return typeError ? (
     <span>File type/size error, Hovered on types!</span>
@@ -38,7 +48,15 @@ const drawDecription = (currFile: File | null, uploaded: boolean, typeError: boo
     </Description>
   );
 };
-
+/**
+ *
+ * Check if the file uploaded is in the type list or not
+ * @param file - The File uploaded
+ * @param types - Available types
+ * @returns boolean
+ *
+ * @internal
+ */
 const checkType = (file: File, types: Array<string>): boolean => {
   const fileType: string = file.type.toLocaleLowerCase();
   const extensionIndex: number = fileType.lastIndexOf("/");
@@ -46,10 +64,35 @@ const checkType = (file: File, types: Array<string>): boolean => {
   const loweredTypes = types.map(type => type.toLowerCase());
   return loweredTypes.includes(extension);
 };
+
+/**
+ * Converting the file size to MB
+ * @param size : Size to be converted;
+ * @returns number
+ *
+ * @internal
+ */
 const getFileSizeMB = (size: number): number => {
   return size / 1000 / 1000;
 };
 
+/**
+ * File uploading main function
+ * @param props - {name,
+    hoverTitle,
+    types,
+    handleChange,
+    classes,
+    children,
+    maxSize,
+    minSize,
+    file,
+    onSizeError,
+    onSelect,
+    onDrop,
+    onTypeError}
+ * @returns JSX Element
+ */
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const {
     name,
