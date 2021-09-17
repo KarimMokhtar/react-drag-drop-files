@@ -2,24 +2,24 @@ import { useState, useEffect, useCallback } from "react";
 
 let draggingCount = 0;
 type Params = {
-  div: any;
-  clickRef: any;
+  labelRef: any;
+  inputRef: any;
   handleChanges: (arg0: File) => void;
   onDrop?: (arg0: File) => void;
 };
 
 /**
- * 
- * @param param0 
- * @returns 
- * 
+ *
+ * @param data - labelRef, inputRef, handleChanges, onDrop
+ * @returns boolean - the state.
+ *
  * @internal
  */
-export default function useDragging({ div, clickRef, handleChanges, onDrop }: Params) {
+export default function useDragging({ labelRef, inputRef, handleChanges, onDrop }: Params): boolean {
   const [dragging, setDragging] = useState(false);
   const handleClick = useCallback(() => {
-    clickRef.current.click();
-  }, [clickRef]);
+    inputRef.current.click();
+  }, [inputRef]);
 
   const handleDragIn = useCallback(ev => {
     ev.preventDefault();
@@ -57,7 +57,7 @@ export default function useDragging({ div, clickRef, handleChanges, onDrop }: Pa
     [handleChanges]
   );
   useEffect(() => {
-    const ele = div.current;
+    const ele = labelRef.current;
     ele.addEventListener("click", handleClick);
     ele.addEventListener("dragenter", handleDragIn);
     ele.addEventListener("dragleave", handleDragOut);
@@ -70,7 +70,7 @@ export default function useDragging({ div, clickRef, handleChanges, onDrop }: Pa
       ele.removeEventListener("dragover", handleDrag);
       ele.removeEventListener("drop", handleDrop);
     };
-  }, [handleClick, handleDragIn, handleDragOut, handleDrag, handleDrop, div]);
+  }, [handleClick, handleDragIn, handleDragOut, handleDrag, handleDrop, labelRef]);
 
   return dragging;
 }
