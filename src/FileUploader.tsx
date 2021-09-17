@@ -109,8 +109,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     onDrop,
     onTypeError,
   } = props;
-  const div = useRef<any>(null);
-  const clickRef = useRef<any>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [uploaded, setUploaded] = useState(false);
   const [currFile, setFile] = useState<File | null>(null);
   const [error, setError] = useState(false);
@@ -147,7 +147,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     if (onSelect && success) onSelect(file);
     ev.target.value = null;
   };
-  const dragging = useDragging({ div, clickRef, handleChanges, onDrop });
+  const dragging = useDragging({ labelRef, inputRef, handleChanges, onDrop });
 
   useEffect(() => {
     if (file) {
@@ -159,8 +159,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     }
   }, [file]);
   return (
-    <UploaderWrapper className={classes} ref={div} htmlFor={name}>
-      <input onChange={handleInputChange} ref={clickRef} type="file" name={name} />
+    <UploaderWrapper className={classes} ref={labelRef} htmlFor={name}>
+      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} />
       {dragging && (
         <HoverMsg>
           <span>{hoverTitle || "Drop Here"}</span>

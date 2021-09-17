@@ -10,7 +10,7 @@ type Props = {
  *
  * @internal
  */
-export default function DrawTypes({ types, minSize, maxSize }: Props) {
+export default function DrawTypes({ types, minSize, maxSize }: Props): null | JSX.Element {
   if (types) {
     const stringTypes = types.toString();
     let size = "";
