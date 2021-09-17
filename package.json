@@ -18,7 +18,8 @@
     "build-watch": "rollup -c -w",
     "start-playground": "cd playground && npm run start",
     "install-all": "npm i && cd playground && npm i",
-    "dev": "npm-run-all --parallel build-watch start-playground"
+    "dev": "npm-run-all --parallel build-watch start-playground",
+    "deploy:npm": "npm rum build && npm publish"
   },
   "eslintConfig": {
     "extends": [
