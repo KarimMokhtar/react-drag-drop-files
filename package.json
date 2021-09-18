@@ -20,7 +20,7 @@
     "install-all": "yarn install && cd playground && npm i",
     "dev": "npm-run-all --parallel build-watch start-playground",
     "deploy:npm": "yarn run build && npm publish",
-    "eslint:check": "eslint --ext .ts --ext .tsx ."
+    "lint:check": "eslint --ext .ts --ext .tsx ."
   },
   "eslintConfig": {
     "extends": [

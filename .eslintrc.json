@@ -38,5 +38,16 @@
     ],
     "react/react-in-jsx-scope": 0,
     "typescript-eslint/explicit-module-boundary-types": 0
-  }
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.ts"],
+      "env": { "jest": true, "node": true }
+    }
+  ]
 }
