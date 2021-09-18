@@ -1,3 +1,4 @@
+import React from 'react';
 type Props = {
   types?: Array<string>;
   minSize?: number;

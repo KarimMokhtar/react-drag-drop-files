@@ -4,3 +4,4 @@
 .babelrc
 tsconfig*
 rollup*
+/tests

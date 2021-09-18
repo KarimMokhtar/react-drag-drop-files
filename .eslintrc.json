@@ -16,7 +16,7 @@
     },
     "ecmaVersion": 12,
     "sourceType": "module",
-    "project": "tsconfig.eslint.json"
+    "project": "./tsconfig.eslint.json"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
@@ -38,5 +38,16 @@
     ],
     "react/react-in-jsx-scope": 0,
     "typescript-eslint/explicit-module-boundary-types": 0
-  }
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.ts"],
+      "env": { "jest": true, "node": true }
+    }
+  ]
 }
