@@ -57,6 +57,7 @@ export default DragDrop;
 Option | Type | Description | value example
 --- | --- | --- | ---
 name | string | the name for your form (if exist) | ```"myFile"```
+disabled | boolean | this for disabled the input | ```true | false```
 hoverTitle | string | text appears(hover) when trying to drop a file | ```"Drop here"```
 file | file or null | this mainly made because if you would like to remove uploaded file pass null or pass another file as initial | 
 classes | string | string with the classes wished to add | ```"drop_area drop_zone"```
@@ -76,5 +77,6 @@ handleChange | function | function that will be called when the user select or d
 - [ ] Adding Multiple Files
 - [ ] Contribution Guide
 - [x] Show different type of Errors
+- [x] Add disabled props
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

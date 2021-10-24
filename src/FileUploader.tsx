@@ -166,8 +166,6 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       setFile(null);
     }
   }, [file]);
-  console.log('disabled')
-  console.log(disabled)
 
   return (
     <UploaderWrapper className={`${classes || ''} ${disabled ? 'is-disabled': ''}`} ref={labelRef} htmlFor={name}>
