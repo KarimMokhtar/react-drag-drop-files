@@ -7,7 +7,7 @@ function App() {
   const [file, setFile] = useState(null);
   const handleChange = file => {
     setFile(file);
-    console.log("changesss", file);
+    console.log("changes", file);
   };
   const onDrop = file => {
     console.log("drop", file);
@@ -31,6 +31,7 @@ function App() {
         onSizeError={onSizeError}
         onDrop={onDrop}
         onSelect={onSelect}
+        disabled={true}
       />
       <br />
       <button onClick={() => setFile(null)}>Clear File</button>
