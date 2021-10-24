@@ -11,6 +11,7 @@ export const UploaderWrapper = styled.label`
   display: flex;
   align-items: center;
   position: relative;
+  min-width: 322px;
   max-width: 508px;
   height: 48px;
   flex-grow: 0;
@@ -18,6 +19,18 @@ export const UploaderWrapper = styled.label`
   border-radius: 5px;
   border: dashed 2px ${primary};
   cursor: pointer;
+  &.is-disabled {
+    border: dashed 2px ${darkGray};
+    cursor: no-drop;
+    svg {
+      fill: ${darkGray};
+      color: ${darkGray};
+      path {
+        fill: ${darkGray};
+        color: ${darkGray};
+      }
+    }
+  }
   & > input {
     display: none;
   }

@@ -14,6 +14,7 @@ type Props = {
   maxSize?: number;
   minSize?: number;
   file?: File | null;
+  disabled?: boolean | false;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File) => void;
@@ -26,24 +27,29 @@ type Props = {
  * @param currFile - The uploaded file
  * @param uploaded - boolean to check if the file uploaded or not yet
  * @param typeError - boolean to check if the file has type errors
+ * @param disabled - boolean to check if input is disabled
  * @returns JSX Element
  *
  * @internal
  *
  */
-const drawDecription = (currFile: File | null, uploaded: boolean, typeError: boolean) => {
+const drawDecryption = (currFile: File | null, uploaded: boolean, typeError: boolean, disabled: boolean | undefined) => {
   return typeError ? (
     <span>File type/size error, Hovered on types!</span>
   ) : (
     <Description>
-      {!currFile && !uploaded ? (
+      {disabled ? (
+        <span>Upload disabled</span>
+      ) : (
+       !currFile && !uploaded ? (
         <>
           <span>Upload</span> or drop a file right here
         </>
-      ) : (
-        <>
-          <span>Uploaded Successfully!.</span> Upload another?
-        </>
+        ) : (
+          <>
+            <span>Uploaded Successfully!.</span> Upload another?
+          </>
+        )
       )}
     </Description>
   );
@@ -90,7 +96,8 @@ const getFileSizeMB = (size: number): number => {
     onSizeError,
     onSelect,
     onDrop,
-    onTypeError}
+    onTypeError,
+    disabled}
  * @returns JSX Element
  */
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
@@ -108,6 +115,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     onSelect,
     onDrop,
     onTypeError,
+    disabled,
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -158,9 +166,10 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       setFile(null);
     }
   }, [file]);
+
   return (
-    <UploaderWrapper className={classes} ref={labelRef} htmlFor={name}>
-      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} />
+    <UploaderWrapper className={`${classes || ''} ${disabled ? 'is-disabled': ''}`} ref={labelRef} htmlFor={name}>
+      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} disabled={disabled}/>
       {dragging && (
         <HoverMsg>
           <span>{hoverTitle || "Drop Here"}</span>
@@ -170,8 +179,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         <>
           <ImageAdd />
           <DescriptionWrapper error={error}>
-            {drawDecription(currFile, uploaded, error)}
-            <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
+            {drawDecryption(currFile, uploaded, error, disabled)}
+            <DrawTypes types={types} minSize={minSize} maxSize={maxSize}/>
           </DescriptionWrapper>
         </>
       )}
