@@ -180,7 +180,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
           <ImageAdd />
           <DescriptionWrapper error={error}>
             {drawDecryption(currFile, uploaded, error, disabled)}
-            <DrawTypes types={types} minSize={minSize} maxSize={maxSize} disabled={disabled}/>
+            <DrawTypes types={types} minSize={minSize} maxSize={maxSize}/>
           </DescriptionWrapper>
         </>
       )}
