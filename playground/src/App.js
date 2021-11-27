@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <FileUploader
-        classes="testttt"
+        classes="sample-class"
         file={file}
         onTypeError={onTypeError}
         handleChange={handleChange}
