@@ -33,23 +33,26 @@ type Props = {
  * @internal
  *
  */
-const drawDecryption = (currFile: File | null, uploaded: boolean, typeError: boolean, disabled: boolean | undefined) => {
+const drawDecryption = (
+  currFile: File | null,
+  uploaded: boolean,
+  typeError: boolean,
+  disabled: boolean | undefined
+) => {
   return typeError ? (
     <span>File type/size error, Hovered on types!</span>
   ) : (
     <Description>
       {disabled ? (
         <span>Upload disabled</span>
-      ) : (
-       !currFile && !uploaded ? (
+      ) : !currFile && !uploaded ? (
         <>
           <span>Upload</span> or drop a file right here
         </>
-        ) : (
-          <>
-            <span>Uploaded Successfully!.</span> Upload another?
-          </>
-        )
+      ) : (
+        <>
+          <span>Uploaded Successfully!.</span> Upload another?
+        </>
       )}
     </Description>
   );
@@ -168,8 +171,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   }, [file]);
 
   return (
-    <UploaderWrapper className={`${classes || ''} ${disabled ? 'is-disabled': ''}`} ref={labelRef} htmlFor={name}>
-      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} disabled={disabled}/>
+    <UploaderWrapper overRide={children} className={`${classes || ""} ${disabled ? "is-disabled" : ""}`} ref={labelRef} htmlFor={name}>
+      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} disabled={disabled} />
       {dragging && (
         <HoverMsg>
           <span>{hoverTitle || "Drop Here"}</span>
@@ -180,7 +183,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
           <ImageAdd />
           <DescriptionWrapper error={error}>
             {drawDecryption(currFile, uploaded, error, disabled)}
-            <DrawTypes types={types} minSize={minSize} maxSize={maxSize}/>
+            <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
           </DescriptionWrapper>
         </>
       )}

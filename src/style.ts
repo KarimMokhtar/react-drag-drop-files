@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const primary = "#0658c2",
   darkGray = "#666",
@@ -7,18 +7,22 @@ const primary = "#0658c2",
  *
  * @internal
  */
-export const UploaderWrapper = styled.label`
+
+const defaultStyle = css`
   display: flex;
   align-items: center;
-  position: relative;
   min-width: 322px;
   max-width: 508px;
   height: 48px;
-  flex-grow: 0;
+  border: dashed 2px ${primary};
   padding: 8px 16px 8px 8px;
   border-radius: 5px;
-  border: dashed 2px ${primary};
   cursor: pointer;
+  flex-grow: 0;
+`;
+export const UploaderWrapper = styled.label<any>`
+  position: relative;
+  ${props => (props.overRide ? "" : defaultStyle)};
   &.is-disabled {
     border: dashed 2px ${darkGray};
     cursor: no-drop;
