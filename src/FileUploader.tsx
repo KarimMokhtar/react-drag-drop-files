@@ -15,6 +15,7 @@ type Props = {
   minSize?: number;
   file?: File | null;
   disabled?: boolean | false;
+  label?: string | undefined;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File) => void;
@@ -28,6 +29,7 @@ type Props = {
  * @param uploaded - boolean to check if the file uploaded or not yet
  * @param typeError - boolean to check if the file has type errors
  * @param disabled - boolean to check if input is disabled
+ * @param label - string to add custom label
  * @returns JSX Element
  *
  * @internal
@@ -37,7 +39,8 @@ const drawDecryption = (
   currFile: File | null,
   uploaded: boolean,
   typeError: boolean,
-  disabled: boolean | undefined
+  disabled: boolean | undefined,
+  label: string | undefined
 ) => {
   return typeError ? (
     <span>File type/size error, Hovered on types!</span>
@@ -47,7 +50,15 @@ const drawDecryption = (
         <span>Upload disabled</span>
       ) : !currFile && !uploaded ? (
         <>
-          <span>Upload</span> or drop a file right here
+          {label? 
+              <>
+              <span>{label.split(" ")[0]}</span>{" "}{label.substr(label.indexOf(" ") + 1)}
+              </> 
+            : 
+              <>
+                <span>Upload</span> or drop a file right here
+              </>
+          }
         </>
       ) : (
         <>
@@ -100,7 +111,8 @@ const getFileSizeMB = (size: number): number => {
     onSelect,
     onDrop,
     onTypeError,
-    disabled}
+    disabled,
+    label}
  * @returns JSX Element
  */
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
@@ -119,6 +131,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     onDrop,
     onTypeError,
     disabled,
+    label,
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -182,7 +195,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         <>
           <ImageAdd />
           <DescriptionWrapper error={error}>
-            {drawDecryption(currFile, uploaded, error, disabled)}
+            {drawDecryption(currFile, uploaded, error, disabled, label)}
             <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
           </DescriptionWrapper>
         </>
