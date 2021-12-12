@@ -31,6 +31,7 @@ function App() {
         onSizeError={onSizeError}
         onDrop={onDrop}
         onSelect={onSelect}
+        label="Upload file here"
         disabled={true}
       />
       <br />

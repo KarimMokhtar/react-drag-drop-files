@@ -50,15 +50,15 @@ const drawDecryption = (
         <span>Upload disabled</span>
       ) : !currFile && !uploaded ? (
         <>
-          {label? 
-              <>
-              <span>{label.split(" ")[0]}</span>{" "}{label.substr(label.indexOf(" ") + 1)}
-              </> 
-            : 
-              <>
-                <span>Upload</span> or drop a file right here
-              </>
-          }
+          {label ? (
+            <>
+              <span>{label.split(" ")[0]}</span> {label.substr(label.indexOf(" ") + 1)}
+            </>
+          ) : (
+            <>
+              <span>Upload</span> or drop a file right here
+            </>
+          )}
         </>
       ) : (
         <>
@@ -184,7 +184,11 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   }, [file]);
 
   return (
-    <UploaderWrapper overRide={children} className={`${classes || ""} ${disabled ? "is-disabled" : ""}`} ref={labelRef} htmlFor={name}>
+    <UploaderWrapper
+      overRide={children}
+      className={`${classes || ""} ${disabled ? "is-disabled" : ""}`}
+      ref={labelRef}
+      htmlFor={name}>
       <input onChange={handleInputChange} ref={inputRef} type="file" name={name} disabled={disabled} />
       {dragging && (
         <HoverMsg>
