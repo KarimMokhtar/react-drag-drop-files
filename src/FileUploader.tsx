@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
 import ImageAdd from "./ImageAdd";
+import { accepted_ext, getFileSizeMB } from "./utils";
 import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
 
 type Props = {
@@ -17,7 +18,6 @@ type Props = {
   disabled?: boolean | false;
   label?: string | undefined;
   onSizeError?: (arg0: string) => void;
-  onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File) => void;
   onSelect?: (arg0: File) => void;
   handleChange?: (arg0: File) => void;
@@ -35,7 +35,7 @@ type Props = {
  * @internal
  *
  */
-const drawDecryption = (
+const drawDescription = (
   currFile: File | null,
   uploaded: boolean,
   typeError: boolean,
@@ -67,33 +67,6 @@ const drawDecryption = (
       )}
     </Description>
   );
-};
-/**
- *
- * Check if the file uploaded is in the type list or not
- * @param file - The File uploaded
- * @param types - Available types
- * @returns boolean
- *
- * @internal
- */
-const checkType = (file: File, types: Array<string>): boolean => {
-  const fileType: string = file.type.toLocaleLowerCase();
-  const extensionIndex: number = fileType.lastIndexOf("/");
-  const extension: string = fileType.substring(extensionIndex + 1);
-  const loweredTypes = types.map(type => type.toLowerCase());
-  return loweredTypes.includes(extension);
-};
-
-/**
- * Converting the file size to MB
- * @param size : Size to be converted;
- * @returns number
- *
- * @internal
- */
-const getFileSizeMB = (size: number): number => {
-  return size / 1000 / 1000;
 };
 
 /**
@@ -129,7 +102,6 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     onSizeError,
     onSelect,
     onDrop,
-    onTypeError,
     disabled,
     label,
   } = props;
@@ -141,12 +113,6 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
 
   const handleChanges = (file: File): boolean => {
     if (file) {
-      if (types && !checkType(file, types)) {
-        // types included and type not in them
-        setError(true);
-        if (onTypeError) onTypeError("File type is not supported");
-        return false;
-      }
       if (maxSize && getFileSizeMB(file.size) > maxSize) {
         setError(true);
         if (onSizeError) onSizeError("File size is too big");
@@ -182,14 +148,20 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       setFile(null);
     }
   }, [file]);
-
   return (
     <UploaderWrapper
       overRide={children}
       className={`${classes || ""} ${disabled ? "is-disabled" : ""}`}
       ref={labelRef}
       htmlFor={name}>
-      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} disabled={disabled} />
+      <input
+        onChange={handleInputChange}
+        accept={accepted_ext(types)}
+        ref={inputRef}
+        type="file"
+        name={name}
+        disabled={disabled}
+      />
       {dragging && (
         <HoverMsg>
           <span>{hoverTitle || "Drop Here"}</span>
@@ -199,7 +171,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         <>
           <ImageAdd />
           <DescriptionWrapper error={error}>
-            {drawDecryption(currFile, uploaded, error, disabled, label)}
+            {drawDescription(currFile, uploaded, error, disabled, label)}
             <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
           </DescriptionWrapper>
         </>
