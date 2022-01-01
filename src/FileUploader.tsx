@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 
 import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
@@ -138,6 +138,11 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const [uploaded, setUploaded] = useState(false);
   const [currFile, setFile] = useState<File | null>(null);
   const [error, setError] = useState(false);
+  const accepted_ext = useMemo<string>(() => {
+      if (types === undefined) return "";
+      return types.map(type => `.${type.toLowerCase()}`).join(",") ;
+    }
+  , [types]);
 
   const handleChanges = (file: File): boolean => {
     if (file) {
@@ -189,7 +194,12 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       className={`${classes || ""} ${disabled ? "is-disabled" : ""}`}
       ref={labelRef}
       htmlFor={name}>
-      <input onChange={handleInputChange} ref={inputRef} type="file" name={name} disabled={disabled} />
+      <input 
+        onChange={handleInputChange} 
+        accept={accepted_ext} 
+        ref={inputRef} type="file" 
+        name={name} disabled={disabled} 
+      />
       {dragging && (
         <HoverMsg>
           <span>{hoverTitle || "Drop Here"}</span>
