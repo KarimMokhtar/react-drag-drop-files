@@ -48,7 +48,6 @@ export default function useDragging({ labelRef, inputRef, handleChanges, onDrop 
       draggingCount = 0;
       if (ev.dataTransfer.files && ev.dataTransfer.files.length > 0) {
         const file = ev.dataTransfer.files[0];
-        handleChanges(file);
         const success = handleChanges(file);
         if (onDrop && success) onDrop(file);
         ev.dataTransfer.clearData();
