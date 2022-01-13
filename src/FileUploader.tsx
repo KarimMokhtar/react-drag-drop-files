@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
 import ImageAdd from "./ImageAdd";
-import { accepted_ext, getFileSizeMB } from "./utils";
+import { accepted_ext, checkType, getFileSizeMB } from "./utils";
 import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
   disabled?: boolean | false;
   label?: string | undefined;
   onSizeError?: (arg0: string) => void;
+  onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File) => void;
   onSelect?: (arg0: File) => void;
   handleChange?: (arg0: File) => void;
@@ -81,6 +82,7 @@ const drawDescription = (
     minSize,
     file,
     onSizeError,
+    onTypeError,
     onSelect,
     onDrop,
     onTypeError,
@@ -100,6 +102,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     minSize,
     file,
     onSizeError,
+    onTypeError,
     onSelect,
     onDrop,
     disabled,
@@ -113,6 +116,12 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
 
   const handleChanges = (file: File): boolean => {
     if (file) {
+      if (types && !checkType(file, types)) {
+        // types included and type not in them
+        setError(true);
+        if (onTypeError) onTypeError("File type is not supported");
+        return false;
+      }
       if (maxSize && getFileSizeMB(file.size) > maxSize) {
         setError(true);
         if (onSizeError) onSizeError("File size is too big");

@@ -32,7 +32,6 @@ function App() {
         onDrop={onDrop}
         onSelect={onSelect}
         label="Upload file here"
-        disabled={true}
       />
       <br />
       <button onClick={() => setFile(null)}>Clear File</button>
