@@ -21,7 +21,7 @@ type Props = {
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: Array<File>) => void;
-  onSelect?: (arg0: File) => void;
+  onSelect?: (arg0: Array<File>) => void;
   handleChange?: (arg0: Array<File> | File) => void;
 };
 /**
@@ -118,6 +118,9 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const [error, setError] = useState(false);
 
   const handleChanges = (files: Array<File>): boolean => {
+    console.log({ files });
+
+
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -155,8 +158,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     const allFiles = ev.target.files;
     const files = multiple ? allFiles : allFiles[0];
     const success = handleChanges(files);
-    if (onSelect && success) onSelect(files[0]);
-    ev.target.value = null;
+    if (onSelect && success) onSelect(files);
   };
   const dragging = useDragging({ labelRef, inputRef, handleChanges, onDrop });
 
