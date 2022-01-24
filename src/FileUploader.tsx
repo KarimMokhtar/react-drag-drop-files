@@ -20,9 +20,9 @@ type Props = {
   multiple?: boolean | false,
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
-  onDrop?: (arg0: Array<File>) => void;
-  onSelect?: (arg0: Array<File>) => void;
-  handleChange?: (arg0: Array<File> | File) => void;
+  onDrop?: (arg0: File | Array<File>) => void;
+  onSelect?: (arg0: File | Array<File>) => void;
+  handleChange?: (arg0: File | Array<File> | File) => void;
 };
 /**
  *
@@ -117,36 +117,39 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const [currFiles, setFile] = useState<Array<File> | File | null>(null);
   const [error, setError] = useState(false);
 
-  const handleChanges = (files: Array<File>): boolean => {
-    console.log({ files });
+  const validateFile = (file: File) => {
+    if (types && !checkType(file, types)) {
+      // types included and type not in them
+      setError(true);
+      if (onTypeError) onTypeError("File type is not supported");
+      return false;
+    }
+    if (maxSize && getFileSizeMB(file.size) > maxSize) {
+      setError(true);
+      if (onSizeError) onSizeError("File size is too big");
+      return false;
+    }
+    if (minSize && getFileSizeMB(file.size) < minSize) {
+      setError(true);
+      if (onSizeError) onSizeError("File size is too small");
+      return false;
+    }
+  }
 
-
+  const handleChanges = (files: File | Array<File>): boolean => {
     if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+      if (files instanceof File) {
+        validateFile(files);
+      } else {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
 
-        if (types && !checkType(file, types)) {
-          // types included and type not in them
-          setError(true);
-          if (onTypeError) onTypeError("File type is not supported");
-          return false;
-        }
-        if (maxSize && getFileSizeMB(file.size) > maxSize) {
-          setError(true);
-          if (onSizeError) onSizeError("File size is too big");
-          return false;
-        }
-        if (minSize && getFileSizeMB(file.size) < minSize) {
-          setError(true);
-          if (onSizeError) onSizeError("File size is too small");
-          return false;
+          validateFile(file);
         }
       }
 
-      const _files = multiple ? files : files[0];
-
-      if (handleChange) handleChange(_files);
-      setFile(_files);
+      if (handleChange) handleChange(files);
+      setFile(files);
 
       setUploaded(true);
       setError(false);
@@ -160,7 +163,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     const success = handleChanges(files);
     if (onSelect && success) onSelect(files);
   };
-  const dragging = useDragging({ labelRef, inputRef, handleChanges, onDrop });
+  const dragging = useDragging({ labelRef, inputRef, multiple, handleChanges, onDrop });
 
   useEffect(() => {
     if (fileOrFiles) {

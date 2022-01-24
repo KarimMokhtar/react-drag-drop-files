@@ -4,6 +4,7 @@ let draggingCount = 0;
 type Params = {
   labelRef: any;
   inputRef: any;
+  multiple?: boolean | false;
   handleChanges: (arg0: Array<File>) => void;
   onDrop?: (arg0: Array<File>) => void;
 };
@@ -15,7 +16,7 @@ type Params = {
  *
  * @internal
  */
-export default function useDragging({ labelRef, inputRef, handleChanges, onDrop }: Params): boolean {
+export default function useDragging({ labelRef, inputRef, multiple, handleChanges, onDrop }: Params): boolean {
   const [dragging, setDragging] = useState(false);
   const handleClick = useCallback(() => {
     inputRef.current.click();
@@ -46,8 +47,10 @@ export default function useDragging({ labelRef, inputRef, handleChanges, onDrop 
       ev.stopPropagation();
       setDragging(false);
       draggingCount = 0;
-      if (ev.dataTransfer.files && ev.dataTransfer.files.length > 0) {
-        const files = ev.dataTransfer.files;
+
+      const _files = ev.dataTransfer.files;
+      if (_files && _files.length > 0) {
+        const files = multiple ? _files : _files[0];
         const success = handleChanges(files);
         if (onDrop && success) onDrop(files);
         ev.dataTransfer.clearData();
