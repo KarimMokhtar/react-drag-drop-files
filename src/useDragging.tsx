@@ -4,8 +4,8 @@ let draggingCount = 0;
 type Params = {
   labelRef: any;
   inputRef: any;
-  handleChanges: (arg0: File) => void;
-  onDrop?: (arg0: File) => void;
+  handleChanges: (arg0: Array<File>) => void;
+  onDrop?: (arg0: Array<File>) => void;
 };
 
 /**
@@ -47,9 +47,9 @@ export default function useDragging({ labelRef, inputRef, handleChanges, onDrop 
       setDragging(false);
       draggingCount = 0;
       if (ev.dataTransfer.files && ev.dataTransfer.files.length > 0) {
-        const file = ev.dataTransfer.files[0];
-        const success = handleChanges(file);
-        if (onDrop && success) onDrop(file);
+        const files = ev.dataTransfer.files;
+        const success = handleChanges(files);
+        if (onDrop && success) onDrop(files);
         ev.dataTransfer.clearData();
       }
     },

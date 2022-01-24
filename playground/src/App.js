@@ -9,16 +9,16 @@ function App() {
     setFile(file);
     console.log("changes", file);
   };
-  const onDrop = file => {
-    console.log("drop", file);
+  const onDrop = (file) => {
+    // console.log("drop", file);
   };
-  const onSelect = file => {
-    console.log("test", file);
+  const onSelect = (file) => {
+    // console.log("test", file);
   };
 
   const onTypeError = (err = 1) => console.log(err);
   const onSizeError = (err = 1) => console.log(err);
-  console.log(file);
+  // console.log(file);
   return (
     <div className="App">
       <FileUploader
@@ -32,6 +32,7 @@ function App() {
         onDrop={onDrop}
         onSelect={onSelect}
         label="Upload file here"
+        multiple
       />
       <br />
       <button onClick={() => setFile(null)}>Clear File</button>
