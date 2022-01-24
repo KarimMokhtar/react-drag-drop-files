@@ -14,7 +14,7 @@ type Props = {
   children?: JSX.Element;
   maxSize?: number;
   minSize?: number;
-  files?: Array<File> | File | null;
+  fileOrFiles?: Array<File> | File | null;
   disabled?: boolean | false;
   label?: string | undefined;
   multiple?: boolean | false,
@@ -81,7 +81,7 @@ const drawDescription = (
     children,
     maxSize,
     minSize,
-    file,
+    fileOrFiles,
     onSizeError,
     onTypeError,
     onSelect,
@@ -102,7 +102,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     children,
     maxSize,
     minSize,
-    files,
+    fileOrFiles,
     onSizeError,
     onTypeError,
     onSelect,
@@ -155,20 +155,20 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     const allFiles = ev.target.files;
     const files = multiple ? allFiles : allFiles[0];
     const success = handleChanges(files);
-    if (onSelect && success) onSelect(files);
+    if (onSelect && success) onSelect(files[0]);
     ev.target.value = null;
   };
   const dragging = useDragging({ labelRef, inputRef, handleChanges, onDrop });
 
   useEffect(() => {
-    if (files) {
+    if (fileOrFiles) {
       setUploaded(true);
-      setFile(files);
+      setFile(fileOrFiles);
     } else {
       setUploaded(false);
       setFile(null);
     }
-  }, [files]);
+  }, [fileOrFiles]);
   return (
     <UploaderWrapper
       overRide={children}
