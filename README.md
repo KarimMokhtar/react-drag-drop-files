@@ -57,6 +57,7 @@ export default DragDrop;
 | disabled     | boolean          | this for disabled the input                                                                                         | `true OR false`                                           |
 | hoverTitle   | string           | text appears(hover) when trying to drop a file                                                                      | `"Drop here"`                                             |
 | fileOrFiles         | Array<File> or File or null     | this mainly made because if you would like to remove uploaded file(s) pass null or pass another file as initial        |
+| multiple | boolean         | a boolean to determine whether the multiple files is enabled or not                                                    | `true OR false - false by default`                             |
 | classes      | string           | string with the classes wished to add                                                                               | `"drop_area drop_zone"`                                   |
 | types        | Array<strings>   | array of strings with extentions to check and go throw                                                              | `['png', 'jpeg', ...]`                                    |
 | onTypeError  | function         | function that will be called only of error occured related to type                                                  | `(err) => console.log(err)`                               |
