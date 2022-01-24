@@ -14,7 +14,7 @@ type Props = {
   children?: JSX.Element;
   maxSize?: number;
   minSize?: number;
-  files?: Array<File> | null;
+  files?: Array<File> | File | null;
   disabled?: boolean | false;
   label?: string | undefined;
   multiple?: boolean | false,
@@ -22,7 +22,7 @@ type Props = {
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: Array<File>) => void;
   onSelect?: (arg0: File) => void;
-  handleChange?: (arg0: Array<File>) => void;
+  handleChange?: (arg0: Array<File> | File) => void;
 };
 /**
  *
@@ -38,7 +38,7 @@ type Props = {
  *
  */
 const drawDescription = (
-  currFile: Array<File> | null,
+  currFile: Array<File> | File | null,
   uploaded: boolean,
   typeError: boolean,
   disabled: boolean | undefined,
@@ -114,7 +114,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploaded, setUploaded] = useState(false);
-  const [currFiles, setFile] = useState<Array<File> | null>(null);
+  const [currFiles, setFile] = useState<Array<File> | File | null>(null);
   const [error, setError] = useState(false);
 
   const handleChanges = (files: Array<File>): boolean => {
@@ -140,8 +140,10 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         }
       }
 
-      if (handleChange) handleChange(files);
-      setFile(files);
+      const _files = multiple ? files : files[0];
+
+      if (handleChange) handleChange(_files);
+      setFile(_files);
 
       setUploaded(true);
       setError(false);
@@ -150,7 +152,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     return false;
   };
   const handleInputChange = (ev: any) => {
-    const files = ev.target.files;
+    const allFiles = ev.target.files;
+    const files = multiple ? allFiles : allFiles[0];
     const success = handleChanges(files);
     if (onSelect && success) onSelect(files);
     ev.target.value = null;
