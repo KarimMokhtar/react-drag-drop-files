@@ -53,24 +53,26 @@ export default DragDrop;
 | Option       | Type             | Description                                                                                                         | value example                                             |
 | ------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | name         | string           | the name for your form (if exist)                                                                                   | `"myFile"`                                                |
+| multiple | boolean         | a boolean to determine whether the multiple files is enabled or not                                                    | `true OR false - false by default`                             |
 | label        | string           | the label (text) for your form (if exist) inside the uploading box - first word underlined                                                                                  | `"Upload or drop a file right here"`                      |
 | disabled     | boolean          | this for disabled the input                                                                                         | `true OR false`                                           |
 | hoverTitle   | string           | text appears(hover) when trying to drop a file                                                                      | `"Drop here"`                                             |
-| file         | file or null     | this mainly made because if you would like to remove uploaded file pass null or pass another file as initial        |
+| fileOrFiles         | Array<File> or File or null     | this mainly made because if you would like to remove uploaded file(s) pass null or pass another file as initial        |
 | classes      | string           | string with the classes wished to add                                                                               | `"drop_area drop_zone"`                                   |
 | types        | Array<strings>   | array of strings with extentions to check and go throw                                                              | `['png', 'jpeg', ...]`                                    |
+| onTypeError  | function         | function that will be called only of error occured related to type                                                  | `(err) => console.log(err)`                               |
 | children     | JSX Element, any | if you want to replace the current design inside the box of drop zone. (**it will remove the default exist style**) | `<div><p>this is inside drop area</p></div>` or just text |
 | maxSize      | number           | the maximum size of the file (number in mb)                                                                         | 2                                                         |
 | minSize      | number           | the minimum size of the file (number in mb)                                                                         | 1                                                         |
 | onSizeError  | function         | function that will be called only of error occured related to size min or max                                       | `(file) => console.log(file)`                             |
-| onDrop       | function         | function that will be called when the user drop a file on the drop area only                                        | `(file) => console.log(file)`                             |
-| onSelect     | function         | function that will be called when the user select a file on click the file area only                                | `(file) => console.log(file)`                             |
-| handleChange | function         | function that will be called when the user select or drop a file                                                    | `(file) => console.log(file)`                             |
+| onDrop       | function         | function that will be called when the user drops file(s) on the drop area only                                        | `(file) => console.log(file)`                             |
+| onSelect     | function         | function that will be called when the user selects file(s) on click the file area only                                | `(file) => console.log(file)`                             |
+| handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
 
 ### Upcoming...
 
 - [x] Files Validation
-- [ ] Adding Multiple Files
+- [x] Adding Multiple Files
 - [ ] Contribution Guide
 - [x] Show different type of Errors
 - [x] Add disabled props
