@@ -9,10 +9,10 @@ function App() {
     setFile(file);
     console.log("changes", file);
   };
-  const onDrop = file => {
+  const onDrop = (file) => {
     console.log("drop", file);
   };
-  const onSelect = file => {
+  const onSelect = (file) => {
     console.log("test", file);
   };
 
@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <FileUploader
         classes="sample-class"
-        file={file}
+        fileOrFiles={file}
         onTypeError={onTypeError}
         handleChange={handleChange}
         name="image"
@@ -32,6 +32,7 @@ function App() {
         onDrop={onDrop}
         onSelect={onSelect}
         label="Upload file here"
+        multiple
       />
       <br />
       <button onClick={() => setFile(null)}>Clear File</button>

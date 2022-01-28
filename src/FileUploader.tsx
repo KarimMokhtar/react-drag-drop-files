@@ -14,14 +14,15 @@ type Props = {
   children?: JSX.Element;
   maxSize?: number;
   minSize?: number;
-  file?: File | null;
+  fileOrFiles?: Array<File> | File | null;
   disabled?: boolean | false;
   label?: string | undefined;
+  multiple?: boolean | false,
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
-  onDrop?: (arg0: File) => void;
-  onSelect?: (arg0: File) => void;
-  handleChange?: (arg0: File) => void;
+  onDrop?: (arg0: File | Array<File>) => void;
+  onSelect?: (arg0: File | Array<File>) => void;
+  handleChange?: (arg0: File | Array<File> | File) => void;
 };
 /**
  *
@@ -37,7 +38,7 @@ type Props = {
  *
  */
 const drawDescription = (
-  currFile: File | null,
+  currFile: Array<File> | File | null,
   uploaded: boolean,
   typeError: boolean,
   disabled: boolean | undefined,
@@ -80,14 +81,15 @@ const drawDescription = (
     children,
     maxSize,
     minSize,
-    file,
+    fileOrFiles,
     onSizeError,
     onTypeError,
     onSelect,
     onDrop,
     onTypeError,
     disabled,
-    label}
+    label,
+    multiple}
  * @returns JSX Element
  */
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
@@ -100,40 +102,55 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     children,
     maxSize,
     minSize,
-    file,
+    fileOrFiles,
     onSizeError,
     onTypeError,
     onSelect,
     onDrop,
     disabled,
     label,
+    multiple
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploaded, setUploaded] = useState(false);
-  const [currFile, setFile] = useState<File | null>(null);
+  const [currFiles, setFile] = useState<Array<File> | File | null>(null);
   const [error, setError] = useState(false);
 
-  const handleChanges = (file: File): boolean => {
-    if (file) {
-      if (types && !checkType(file, types)) {
-        // types included and type not in them
-        setError(true);
-        if (onTypeError) onTypeError("File type is not supported");
-        return false;
+  const validateFile = (file: File) => {
+    if (types && !checkType(file, types)) {
+      // types included and type not in them
+      setError(true);
+      if (onTypeError) onTypeError("File type is not supported");
+      return false;
+    }
+    if (maxSize && getFileSizeMB(file.size) > maxSize) {
+      setError(true);
+      if (onSizeError) onSizeError("File size is too big");
+      return false;
+    }
+    if (minSize && getFileSizeMB(file.size) < minSize) {
+      setError(true);
+      if (onSizeError) onSizeError("File size is too small");
+      return false;
+    }
+  }
+
+  const handleChanges = (files: File | Array<File>): boolean => {
+    if (files) {
+      if (files instanceof File) {
+        validateFile(files);
+      } else {
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+
+          validateFile(file);
+        }
       }
-      if (maxSize && getFileSizeMB(file.size) > maxSize) {
-        setError(true);
-        if (onSizeError) onSizeError("File size is too big");
-        return false;
-      }
-      if (minSize && getFileSizeMB(file.size) < minSize) {
-        setError(true);
-        if (onSizeError) onSizeError("File size is too small");
-        return false;
-      }
-      if (handleChange) handleChange(file);
-      setFile(file);
+
+      if (handleChange) handleChange(files);
+      setFile(files);
+
       setUploaded(true);
       setError(false);
       return true;
@@ -141,22 +158,22 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     return false;
   };
   const handleInputChange = (ev: any) => {
-    const file = ev.target.files[0];
-    const success = handleChanges(file);
-    if (onSelect && success) onSelect(file);
-    ev.target.value = null;
+    const allFiles = ev.target.files;
+    const files = multiple ? allFiles : allFiles[0];
+    const success = handleChanges(files);
+    if (onSelect && success) onSelect(files);
   };
-  const dragging = useDragging({ labelRef, inputRef, handleChanges, onDrop });
+  const dragging = useDragging({ labelRef, inputRef, multiple, handleChanges, onDrop });
 
   useEffect(() => {
-    if (file) {
+    if (fileOrFiles) {
       setUploaded(true);
-      setFile(file);
+      setFile(fileOrFiles);
     } else {
       setUploaded(false);
       setFile(null);
     }
-  }, [file]);
+  }, [fileOrFiles]);
   return (
     <UploaderWrapper
       overRide={children}
@@ -170,6 +187,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         type="file"
         name={name}
         disabled={disabled}
+        multiple={multiple}
       />
       {dragging && (
         <HoverMsg>
@@ -180,7 +198,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         <>
           <ImageAdd />
           <DescriptionWrapper error={error}>
-            {drawDescription(currFile, uploaded, error, disabled, label)}
+            {drawDescription(currFiles, uploaded, error, disabled, label)}
             <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
           </DescriptionWrapper>
         </>
