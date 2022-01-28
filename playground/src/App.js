@@ -4,26 +4,26 @@ import "./App.css";
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 
 function App() {
-  const [file, setFile] = useState(null);
-  const handleChange = file => {
-    setFile(file);
-    console.log("changes", file);
+  const [fileOrFiles, setFile] = useState(null);
+  const handleChange = fileOrFiles => {
+    setFile(fileOrFiles);
+    console.log("changes", fileOrFiles);
   };
-  const onDrop = (file) => {
-    console.log("drop", file);
+  const onDrop = (fileOrFiles) => {
+    console.log("drop", fileOrFiles);
   };
-  const onSelect = (file) => {
-    console.log("test", file);
+  const onSelect = (fileOrFiles) => {
+    console.log("test", fileOrFiles);
   };
 
   const onTypeError = (err = 1) => console.log(err);
   const onSizeError = (err = 1) => console.log(err);
-  console.log(file);
+  console.log(fileOrFiles);
   return (
     <div className="App">
       <FileUploader
         classes="sample-class"
-        fileOrFiles={file}
+        fileOrFiles={fileOrFiles}
         onTypeError={onTypeError}
         handleChange={handleChange}
         name="image"
