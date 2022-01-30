@@ -70,13 +70,7 @@ export default DragDrop;
 | handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
 
 ### Upcoming...
-
-- [x] Files Validation
-- [x] Adding Multiple Files
 - [ ] Contribution Guide
-- [x] Show different type of Errors
-- [x] Add disabled props
-- [x] Add custom label
 
 ## License
 
