@@ -134,20 +134,22 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       if (onSizeError) onSizeError("File size is too small");
       return false;
     }
+    return true;
   }
 
   const handleChanges = (files: File | Array<File>): boolean => {
+    let checkError = false;
     if (files) {
       if (files instanceof File) {
-        validateFile(files);
+        checkError = !validateFile(files);
       } else {
+        console.log("files else File",files)
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
-
-          validateFile(file);
+          checkError = !validateFile(file) || checkError;
         }
       }
-
+      if(checkError) return false;
       if (handleChange) handleChange(files);
       setFile(files);
 
@@ -174,6 +176,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       setFile(null);
     }
   }, [fileOrFiles]);
+
   return (
     <UploaderWrapper
       overRide={children}
