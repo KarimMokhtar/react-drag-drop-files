@@ -19,9 +19,7 @@ export const getFileSizeMB = (size: number): number => {
  * @internal
  */
  export const checkType = (file: File, types: Array<string>): boolean => {
-  const fileType: string = file.type.toLocaleLowerCase();
-  const extensionIndex: number = fileType.lastIndexOf("/");
-  const extension: string = fileType.substring(extensionIndex + 1);
+  const extension: string = file.name.split('.').pop() as string;
   const loweredTypes = types.map(type => type.toLowerCase());
   return loweredTypes.includes(extension);
 };
