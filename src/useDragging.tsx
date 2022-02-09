@@ -53,7 +53,6 @@ export default function useDragging({ labelRef, inputRef, multiple, handleChange
         const files = multiple ? _files : _files[0];
         const success = handleChanges(files);
         if (onDrop && success) onDrop(files);
-        ev.dataTransfer.clearData();
       }
     },
     [handleChanges]
