@@ -1,10 +1,14 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useImperativeHandle, forwardRef } from "react";
 
 import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
 import ImageAdd from "./ImageAdd";
 import { accepted_ext, checkType, getFileSizeMB } from "./utils";
 import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
+
+type ImperativeRefType = {
+  isDragEntered : boolean
+}
 
 type Props = {
   name?: string;
@@ -92,7 +96,7 @@ const drawDescription = (
     multiple}
  * @returns JSX Element
  */
-const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
+const FileUploader: React.FC<Props> = forwardRef<ImperativeRefType, Props>((props,ref): JSX.Element => {
   const {
     name,
     hoverTitle,
@@ -167,6 +171,10 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   };
   const dragging = useDragging({ labelRef, inputRef, multiple, handleChanges, onDrop });
 
+  useImperativeHandle(ref, () => ({
+    isDragEntered: dragging
+  }))
+
   useEffect(() => {
     if (fileOrFiles) {
       setUploaded(true);
@@ -209,5 +217,5 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       {children}
     </UploaderWrapper>
   );
-};
+});
 export default FileUploader;
