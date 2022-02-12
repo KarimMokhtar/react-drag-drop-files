@@ -59,18 +59,24 @@ export default DragDrop;
 | hoverTitle   | string           | text appears(hover) when trying to drop a file                                                                      | `"Drop here"`                                             |
 | fileOrFiles         | Array<File> or File or null     | this mainly made because if you would like to remove uploaded file(s) pass null or pass another file as initial        |
 | classes      | string           | string with the classes wished to add                                                                               | `"drop_area drop_zone"`                                   |
-| types        | Array<strings>   | array of strings with extentions to check and go throw                                                              | `['png', 'jpeg', ...]`                                    |
-| onTypeError  | function         | function that will be called only of error occured related to type                                                  | `(err) => console.log(err)`                               |
+| types        | Array<strings>   | array of strings with extensions to check and go throw                                                              | `['png', 'jpeg', ...]`                                    |
+| onTypeError  | function         | function that will be called only of error occurred related to type                                                  | `(err) => console.log(err)`                               |
 | children     | JSX Element, any | if you want to replace the current design inside the box of drop zone. (**it will remove the default exist style**) | `<div><p>this is inside drop area</p></div>` or just text |
 | maxSize      | number           | the maximum size of the file (number in mb)                                                                         | 2                                                         |
 | minSize      | number           | the minimum size of the file (number in mb)                                                                         | 1                                                         |
-| onSizeError  | function         | function that will be called only of error occured related to size min or max                                       | `(file) => console.log(file)`                             |
+| onSizeError  | function         | function that will be called only of error occurred related to size min or max                                       | `(file) => console.log(file)`                             |
 | onDrop       | function         | function that will be called when the user drops file(s) on the drop area only                                        | `(file) => console.log(file)`                             |
 | onSelect     | function         | function that will be called when the user selects file(s) on click the file area only                                | `(file) => console.log(file)`                             |
 | handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
+| onDraggingStateChange | function         | function that will be called with the state of dragging                                                    | `(dragging) => console.log(dragging)`                             |
+
+
+## How to contribute:
+  - PLease follow the instructions inside this file: [here](CONTRIBUTION.md)
 
 ### Upcoming...
-- [ ] Contribution Guide
+- [X] Contribution Guide
+- [X] Github actions
 
 ## License
 

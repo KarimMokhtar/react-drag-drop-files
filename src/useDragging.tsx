@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 let draggingCount = 0;
 type Params = {
@@ -16,13 +16,19 @@ type Params = {
  *
  * @internal
  */
-export default function useDragging({ labelRef, inputRef, multiple, handleChanges, onDrop }: Params): boolean {
+export default function useDragging({
+  labelRef,
+  inputRef,
+  multiple,
+  handleChanges,
+  onDrop
+}: Params): boolean {
   const [dragging, setDragging] = useState(false);
   const handleClick = useCallback(() => {
     inputRef.current.click();
   }, [inputRef]);
 
-  const handleDragIn = useCallback(ev => {
+  const handleDragIn = useCallback((ev) => {
     ev.preventDefault();
     ev.stopPropagation();
     draggingCount++;
@@ -30,27 +36,27 @@ export default function useDragging({ labelRef, inputRef, multiple, handleChange
       setDragging(true);
     }
   }, []);
-  const handleDragOut = useCallback(ev => {
+  const handleDragOut = useCallback((ev) => {
     ev.preventDefault();
     ev.stopPropagation();
     draggingCount--;
     if (draggingCount > 0) return;
     setDragging(false);
   }, []);
-  const handleDrag = useCallback(ev => {
+  const handleDrag = useCallback((ev) => {
     ev.preventDefault();
     ev.stopPropagation();
   }, []);
   const handleDrop = useCallback(
-    ev => {
+    (ev) => {
       ev.preventDefault();
       ev.stopPropagation();
       setDragging(false);
       draggingCount = 0;
 
-      const _files = ev.dataTransfer.files;
-      if (_files && _files.length > 0) {
-        const files = multiple ? _files : _files[0];
+      const eventFiles = ev.dataTransfer.files;
+      if (eventFiles && eventFiles.length > 0) {
+        const files = multiple ? eventFiles : eventFiles[0];
         const success = handleChanges(files);
         if (onDrop && success) onDrop(files);
       }
@@ -59,19 +65,26 @@ export default function useDragging({ labelRef, inputRef, multiple, handleChange
   );
   useEffect(() => {
     const ele = labelRef.current;
-    ele.addEventListener("click", handleClick);
-    ele.addEventListener("dragenter", handleDragIn);
-    ele.addEventListener("dragleave", handleDragOut);
-    ele.addEventListener("dragover", handleDrag);
-    ele.addEventListener("drop", handleDrop);
+    ele.addEventListener('click', handleClick);
+    ele.addEventListener('dragenter', handleDragIn);
+    ele.addEventListener('dragleave', handleDragOut);
+    ele.addEventListener('dragover', handleDrag);
+    ele.addEventListener('drop', handleDrop);
     return () => {
-      ele.removeEventListener("click", handleClick);
-      ele.removeEventListener("dragenter", handleDragIn);
-      ele.removeEventListener("dragleave", handleDragOut);
-      ele.removeEventListener("dragover", handleDrag);
-      ele.removeEventListener("drop", handleDrop);
+      ele.removeEventListener('click', handleClick);
+      ele.removeEventListener('dragenter', handleDragIn);
+      ele.removeEventListener('dragleave', handleDragOut);
+      ele.removeEventListener('dragover', handleDrag);
+      ele.removeEventListener('drop', handleDrop);
     };
-  }, [handleClick, handleDragIn, handleDragOut, handleDrag, handleDrop, labelRef]);
+  }, [
+    handleClick,
+    handleDragIn,
+    handleDragOut,
+    handleDrag,
+    handleDrop,
+    labelRef
+  ]);
 
   return dragging;
 }
