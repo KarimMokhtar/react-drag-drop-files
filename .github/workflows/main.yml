@@ -29,6 +29,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Install dependencies
+        run: yarn run install-all
+
       - name: Check linting
         run: yarn run lint:check
 
