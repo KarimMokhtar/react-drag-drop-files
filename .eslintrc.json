@@ -3,12 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
-  ],
+  "extends": ["airbnb-typescript", "plugin:prettier/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -18,26 +13,19 @@
     "sourceType": "module",
     "project": "./tsconfig.eslint.json"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["prettier"],
   "rules": {
-    "prefer-const": "error",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-unused-params": "off",
-    "no-unused-expressions": "off",
-    // needs to be turned on in the future
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".ts", ".tsx"]
-      }
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/jsx-filename-extension": "off",
+    "import/extensions": "off",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state"] }
     ],
-    "react/react-in-jsx-scope": 0,
-    "typescript-eslint/explicit-module-boundary-types": 0
+    "no-console": "warn",
+    "no-underscore-dangle": 0
   },
   "settings": {
     "react": {
