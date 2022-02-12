@@ -4,12 +4,7 @@ import DrawTypes from "./DrawTypes";
 import useDragging from "./useDragging";
 import ImageAdd from "./ImageAdd";
 import { accepted_ext, checkType, getFileSizeMB } from "./utils";
-import {
-  UploaderWrapper,
-  DescriptionWrapper,
-  Description,
-  HoverMsg,
-} from "./style";
+import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
 
 type Props = {
   name?: string;
@@ -60,8 +55,7 @@ const drawDescription = (
         <>
           {label ? (
             <>
-              <span>{label.split(" ")[0]}</span>{" "}
-              {label.substr(label.indexOf(" ") + 1)}
+              <span>{label.split(" ")[0]}</span> {label.substr(label.indexOf(" ") + 1)}
             </>
           ) : (
             <>
@@ -96,7 +90,9 @@ const drawDescription = (
     onTypeError,
     disabled,
     label,
-    multiple}
+    multiple,
+    onDraggingStateChange
+  }
  * @returns JSX Element
  */
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
@@ -182,9 +178,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   });
 
   useEffect(() => {
-    if (onDraggingStateChange) {
-      onDraggingStateChange(dragging);
-    }
+    onDraggingStateChange?.(dragging);
   }, [dragging]);
 
   useEffect(() => {
@@ -202,8 +196,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       overRide={children}
       className={`${classes || ""} ${disabled ? "is-disabled" : ""}`}
       ref={labelRef}
-      htmlFor={name}
-    >
+      htmlFor={name}>
       <input
         onChange={handleInputChange}
         accept={accepted_ext(types)}
