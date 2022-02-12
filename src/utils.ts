@@ -18,9 +18,9 @@ export const getFileSizeMB = (size: number): number => {
  *
  * @internal
  */
- export const checkType = (file: File, types: Array<string>): boolean => {
+export const checkType = (file: File, types: Array<string>): boolean => {
   const extension: string = file.name.split('.').pop() as string;
-  const loweredTypes = types.map(type => type.toLowerCase());
+  const loweredTypes = types.map((type) => type.toLowerCase());
   return loweredTypes.includes(extension.toLowerCase());
 };
 
@@ -31,7 +31,7 @@ export const getFileSizeMB = (size: number): number => {
  *
  * @internal
  */
-export const accepted_ext = (types: Array<string> | undefined) => {
-  if (types === undefined) return "";
-  return types.map(type => `.${type.toLowerCase()}`).join(",");
+export const acceptedExt = (types: Array<string> | undefined) => {
+  if (types === undefined) return '';
+  return types.map((type) => `.${type.toLowerCase()}`).join(',');
 };
