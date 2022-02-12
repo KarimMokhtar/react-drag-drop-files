@@ -2,11 +2,17 @@ name: React-Drag-Drop-Files CI
 
 on:
   push:
-    branches: [dev]
+    branches: [dev, main]
   pull_request:
-    branches: [dev]
+    branches: [dev, main]
 
 jobs:
+  main:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amann/action-semantic-pull-request@v4
+
   build:
     runs-on: ubuntu-latest
 
@@ -22,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Install dependecies
+      - name: Install dependencies
         run: yarn run install-all
       - name: Check linting
         run: yarn run lint:check
