@@ -17,12 +17,13 @@ type Props = {
   fileOrFiles?: Array<File> | File | null;
   disabled?: boolean | false;
   label?: string | undefined;
-  multiple?: boolean | false,
+  multiple?: boolean | false;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File | Array<File>) => void;
   onSelect?: (arg0: File | Array<File>) => void;
   handleChange?: (arg0: File | Array<File> | File) => void;
+  onDraggingStateChange?: (dragging: boolean) => void;
 };
 /**
  *
@@ -89,7 +90,9 @@ const drawDescription = (
     onTypeError,
     disabled,
     label,
-    multiple}
+    multiple,
+    onDraggingStateChange
+  }
  * @returns JSX Element
  */
 const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
@@ -109,7 +112,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     onDrop,
     disabled,
     label,
-    multiple
+    multiple,
+    onDraggingStateChange,
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -135,7 +139,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       return false;
     }
     return true;
-  }
+  };
 
   const handleChanges = (files: File | Array<File>): boolean => {
     let checkError = false;
@@ -143,13 +147,13 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       if (files instanceof File) {
         checkError = !validateFile(files);
       } else {
-        console.log("files else File",files)
+        console.log("files else File", files);
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           checkError = !validateFile(file) || checkError;
         }
       }
-      if(checkError) return false;
+      if (checkError) return false;
       if (handleChange) handleChange(files);
       setFile(files);
 
@@ -165,7 +169,17 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     const success = handleChanges(files);
     if (onSelect && success) onSelect(files);
   };
-  const dragging = useDragging({ labelRef, inputRef, multiple, handleChanges, onDrop });
+  const dragging = useDragging({
+    labelRef,
+    inputRef,
+    multiple,
+    handleChanges,
+    onDrop,
+  });
+
+  useEffect(() => {
+    onDraggingStateChange?.(dragging);
+  }, [dragging]);
 
   useEffect(() => {
     if (fileOrFiles) {
