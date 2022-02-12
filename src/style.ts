@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
-const primary = "#0658c2",
-  darkGray = "#666",
-  lightGray = "#999";
+const primary = '#0658c2',
+  darkGray = '#666',
+  lightGray = '#999';
 /**
  *
  * @internal
@@ -22,7 +22,7 @@ const defaultStyle = css`
 `;
 export const UploaderWrapper = styled.label<any>`
   position: relative;
-  ${props => (props.overRide ? "" : defaultStyle)};
+  ${(props) => (props.overRide ? '' : defaultStyle)};
   &.is-disabled {
     border: dashed 2px ${darkGray};
     cursor: no-drop;
@@ -70,7 +70,7 @@ export const DescriptionWrapper = styled.div<{ error: boolean }>`
   flex-grow: 1;
   & > span {
     font-size: 12px;
-    color: ${props => (props.error ? "red" : darkGray)};
+    color: ${(props) => (props.error ? 'red' : darkGray)};
   }
   .file-types {
     overflow: hidden;

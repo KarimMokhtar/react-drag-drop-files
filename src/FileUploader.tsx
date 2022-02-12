@@ -1,10 +1,15 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from 'react';
 
-import DrawTypes from "./DrawTypes";
-import useDragging from "./useDragging";
-import ImageAdd from "./ImageAdd";
-import { accepted_ext, checkType, getFileSizeMB } from "./utils";
-import { UploaderWrapper, DescriptionWrapper, Description, HoverMsg } from "./style";
+import DrawTypes from './DrawTypes';
+import useDragging from './useDragging';
+import ImageAdd from './ImageAdd';
+import { acceptedExt, checkType, getFileSizeMB } from './utils';
+import {
+  UploaderWrapper,
+  DescriptionWrapper,
+  Description,
+  HoverMsg
+} from './style';
 
 type Props = {
   name?: string;
@@ -55,7 +60,8 @@ const drawDescription = (
         <>
           {label ? (
             <>
-              <span>{label.split(" ")[0]}</span> {label.substr(label.indexOf(" ") + 1)}
+              <span>{label.split(' ')[0]}</span>{' '}
+              {label.substr(label.indexOf(' ') + 1)}
             </>
           ) : (
             <>
@@ -113,7 +119,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     disabled,
     label,
     multiple,
-    onDraggingStateChange,
+    onDraggingStateChange
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -125,17 +131,17 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     if (types && !checkType(file, types)) {
       // types included and type not in them
       setError(true);
-      if (onTypeError) onTypeError("File type is not supported");
+      if (onTypeError) onTypeError('File type is not supported');
       return false;
     }
     if (maxSize && getFileSizeMB(file.size) > maxSize) {
       setError(true);
-      if (onSizeError) onSizeError("File size is too big");
+      if (onSizeError) onSizeError('File size is too big');
       return false;
     }
     if (minSize && getFileSizeMB(file.size) < minSize) {
       setError(true);
-      if (onSizeError) onSizeError("File size is too small");
+      if (onSizeError) onSizeError('File size is too small');
       return false;
     }
     return true;
@@ -147,7 +153,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       if (files instanceof File) {
         checkError = !validateFile(files);
       } else {
-        console.log("files else File", files);
+        console.log('files else File', files);
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           checkError = !validateFile(file) || checkError;
@@ -174,7 +180,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     inputRef,
     multiple,
     handleChanges,
-    onDrop,
+    onDrop
   });
 
   useEffect(() => {
@@ -194,12 +200,13 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   return (
     <UploaderWrapper
       overRide={children}
-      className={`${classes || ""} ${disabled ? "is-disabled" : ""}`}
+      className={`${classes || ''} ${disabled ? 'is-disabled' : ''}`}
       ref={labelRef}
-      htmlFor={name}>
+      htmlFor={name}
+    >
       <input
         onChange={handleInputChange}
-        accept={accepted_ext(types)}
+        accept={acceptedExt(types)}
         ref={inputRef}
         type="file"
         name={name}
@@ -208,7 +215,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       />
       {dragging && (
         <HoverMsg>
-          <span>{hoverTitle || "Drop Here"}</span>
+          <span>{hoverTitle || 'Drop Here'}</span>
         </HoverMsg>
       )}
       {!children && (

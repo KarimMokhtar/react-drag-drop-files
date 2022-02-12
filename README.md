@@ -71,9 +71,12 @@ export default DragDrop;
 | onDraggingStateChange | function         | function that will be called with the state of dragging                                                    | `(dragging) => console.log(dragging)`                             |
 
 
+## How to contribute:
+  - PLease follow the instructions inside this file: [here](CONTRIBUTION.md)
+
 ### Upcoming...
-- [ ] Contribution Guide
-- [ ] Github actions
+- [X] Contribution Guide
+- [X] Github actions
 
 ## License
 
