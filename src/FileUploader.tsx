@@ -22,6 +22,7 @@ type Props = {
   fileOrFiles?: Array<File> | File | null;
   disabled?: boolean | false;
   label?: string | undefined;
+  labelAfter?: string | undefined;
   multiple?: boolean | false;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
@@ -38,6 +39,7 @@ type Props = {
  * @param typeError - boolean to check if the file has type errors
  * @param disabled - boolean to check if input is disabled
  * @param label - string to add custom label
+ * @param labelAfter - string to add custom label shown after drop completed
  * @returns JSX Element
  *
  * @internal
@@ -71,7 +73,16 @@ const drawDescription = (
         </>
       ) : (
         <>
-          <span>Uploaded Successfully!.</span> Upload another?
+          {labelAfter ? (
+            <>
+              <span>{labelAfter.split(' ')[0]}</span>{' '}
+              {labelAfter.substr(labelAfter.indexOf(' ') + 1)}
+            </>
+          ) : (
+            <>
+              <span>Uploaded Successfully!.</span> Upload another?
+            </>
+            )}
         </>
       )}
     </Description>
