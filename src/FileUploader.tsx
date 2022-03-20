@@ -153,7 +153,6 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       if (files instanceof File) {
         checkError = !validateFile(files);
       } else {
-        console.log('files else File', files);
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           checkError = !validateFile(file) || checkError;
