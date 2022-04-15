@@ -29,6 +29,7 @@ type Props = {
   onSelect?: (arg0: File | Array<File>) => void;
   handleChange?: (arg0: File | Array<File> | File) => void;
   onDraggingStateChange?: (dragging: boolean) => void;
+  onDrag?: () => void;
 };
 /**
  *
@@ -119,7 +120,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     disabled,
     label,
     multiple,
-    onDraggingStateChange
+    onDraggingStateChange,
+    onDrag
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -184,6 +186,9 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
 
   useEffect(() => {
     onDraggingStateChange?.(dragging);
+    if(dragging){
+      onDrag?.();
+    }
   }, [dragging]);
 
   useEffect(() => {
