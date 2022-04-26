@@ -1,15 +1,15 @@
-import { useRef, useState, useEffect } from 'react';
+import {
+  Description,
+  DescriptionWrapper,
+  HoverMsg,
+  UploaderWrapper
+} from './style';
+import { acceptedExt, checkType, getFileSizeMB } from './utils';
+import { useEffect, useRef, useState } from 'react';
 
 import DrawTypes from './DrawTypes';
-import useDragging from './useDragging';
 import ImageAdd from './ImageAdd';
-import { acceptedExt, checkType, getFileSizeMB } from './utils';
-import {
-  UploaderWrapper,
-  DescriptionWrapper,
-  Description,
-  HoverMsg
-} from './style';
+import useDragging from './useDragging';
 
 type Props = {
   name?: string;
@@ -169,12 +169,12 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     return false;
   };
 
-  const blockEvent = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const blockEvent = (ev: any) => {
+    ev.preventDefault();
+    ev.stopPropagation();
   };
-  const handleClick = (e: any) => {
-    e.stopPropagation();
+  const handleClick = (ev: any) => {
+    ev.stopPropagation();
     if (inputRef && inputRef.current) {
       inputRef.current.click();
     }
