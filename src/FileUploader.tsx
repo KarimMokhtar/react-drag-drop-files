@@ -168,6 +168,18 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     }
     return false;
   };
+
+  const blockEvent = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  const handleClick = (e: any) => {
+    e.stopPropagation();
+    if (inputRef && inputRef.current) {
+      inputRef.current.click();
+    }
+  };
+
   const handleInputChange = (ev: any) => {
     const allFiles = ev.target.files;
     const files = multiple ? allFiles : allFiles[0];
@@ -202,8 +214,10 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       className={`${classes || ''} ${disabled ? 'is-disabled' : ''}`}
       ref={labelRef}
       htmlFor={name}
+      onClick={blockEvent}
     >
       <input
+        onClick={handleClick}
         onChange={handleInputChange}
         accept={acceptedExt(types)}
         ref={inputRef}
