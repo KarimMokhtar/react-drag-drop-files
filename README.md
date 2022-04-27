@@ -64,7 +64,7 @@ export default DragDrop;
 | children     | JSX Element, any | if you want to replace the current design inside the box of drop zone. (**it will remove the default exist style**) | `<div><p>this is inside drop area</p></div>` or just text |
 | maxSize      | number           | the maximum size of the file (number in mb)                                                                         | 2                                                         |
 | minSize      | number           | the minimum size of the file (number in mb)                                                                         | 1                                                         |
-| onSizeError  | function         | function that will be called only of error occurred related to size min or max                                       | `(file) => console.log(file)`                             |
+| onSizeError  | function         | function that will be called only if error related to min or max size occurred                                      | `(file) => console.log(file)`                             |
 | onDrop       | function         | function that will be called when the user drops file(s) on the drop area only                                        | `(file) => console.log(file)`                             |
 | onSelect     | function         | function that will be called when the user selects file(s) on click the file area only                                | `(file) => console.log(file)`                             |
 | handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
@@ -72,7 +72,7 @@ export default DragDrop;
 
 
 ## How to contribute:
-  - PLease follow the instructions inside this file: [here](CONTRIBUTION.md)
+  - Please follow the instructions inside this file: [here](CONTRIBUTION.md)
 
 ### Upcoming...
 - [X] Contribution Guide
