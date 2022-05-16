@@ -3,10 +3,6 @@ import styled, { css } from 'styled-components';
 const primary = '#0658c2',
   darkGray = '#666',
   lightGray = '#999';
-/**
- *
- * @internal
- */
 
 const defaultStyle = css`
   display: flex;
