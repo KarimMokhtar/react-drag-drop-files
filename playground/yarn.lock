@@ -9140,7 +9140,7 @@
 
 "react-drag-drop-files@../":
   "resolved" "file:.."
-  "version" "2.2.5"
+  "version" "2.3.5"
   dependencies:
     "prop-types" "^15.7.2"
     "styled-components" "^5.3.0"
