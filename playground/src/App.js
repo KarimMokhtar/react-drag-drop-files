@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
-import "./App.css";
-const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
+import { useState } from 'react';
+import { FileUploader } from 'react-drag-drop-files';
+import './App.css';
+const fileTypes = ['JPG', 'PNG', 'GIF', 'JPEG'];
 
 function App() {
   const [fileOrFiles, setFile] = useState(null);
-  const handleChange = fileOrFiles => {
+  const handleChange = (fileOrFiles) => {
     setFile(fileOrFiles);
-    console.log("changes", fileOrFiles);
+    console.log('changes', fileOrFiles);
   };
   const onDrop = (fileOrFiles) => {
-    console.log("drop", fileOrFiles);
+    console.log('drop', fileOrFiles);
   };
   const onSelect = (fileOrFiles) => {
-    console.log("test", fileOrFiles);
+    console.log('test', fileOrFiles);
   };
 
   const onTypeError = (err = 1) => console.log(err);

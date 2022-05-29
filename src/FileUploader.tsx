@@ -175,6 +175,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
   };
   const handleClick = (ev: any) => {
     ev.stopPropagation();
+    // eslint-disable-next-line no-param-reassign
     if (inputRef && inputRef.current) {
       inputRef.current.click();
     }
@@ -203,6 +204,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       setUploaded(true);
       setFile(fileOrFiles);
     } else {
+      if (inputRef.current) inputRef.current.value = '';
       setUploaded(false);
       setFile(null);
     }
