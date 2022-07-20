@@ -79,6 +79,8 @@
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@rollup/plugin-babel": "^5.3.0",
     "@svgr/rollup": "^5.5.0",
     "@testing-library/jest-dom": "^5.16.3",
