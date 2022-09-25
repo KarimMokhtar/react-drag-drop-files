@@ -29,7 +29,7 @@ type Props = {
   onSelect?: (arg0: File | Array<File>) => void;
   handleChange?: (arg0: File | Array<File> | File) => void;
   onDraggingStateChange?: (dragging: boolean) => void;
-  dropMessageStyle: React.CSSProperties | undefined;
+  dropMessageStyle?: React.CSSProperties | undefined;
 };
 /**
  *
