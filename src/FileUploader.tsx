@@ -71,7 +71,7 @@ const drawDescription = (
         </>
       ) : (
         <>
-          <span>Uploaded Successfully!.</span> Upload another?
+          <span>Uploaded Successfully!</span> Upload another?
         </>
       )}
     </Description>
