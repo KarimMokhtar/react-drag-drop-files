@@ -5,7 +5,7 @@ import {
   UploaderWrapper
 } from './style';
 import { acceptedExt, checkType, getFileSizeMB } from './utils';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import DrawTypes from './DrawTypes';
 import ImageAdd from './ImageAdd';
@@ -29,6 +29,7 @@ type Props = {
   onSelect?: (arg0: File | Array<File>) => void;
   handleChange?: (arg0: File | Array<File> | File) => void;
   onDraggingStateChange?: (dragging: boolean) => void;
+  dropMessageStyle?: React.CSSProperties | undefined;
 };
 /**
  *
@@ -119,7 +120,8 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     disabled,
     label,
     multiple,
-    onDraggingStateChange
+    onDraggingStateChange,
+    dropMessageStyle
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -229,7 +231,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         multiple={multiple}
       />
       {dragging && (
-        <HoverMsg>
+        <HoverMsg style={dropMessageStyle}>
           <span>{hoverTitle || 'Drop Here'}</span>
         </HoverMsg>
       )}

@@ -32,6 +32,7 @@ function App() {
         onDrop={onDrop}
         onSelect={onSelect}
         label="Upload file here"
+        dropMessageStyle={{backgroundColor: 'red'}}
         multiple
       />
       <br />
