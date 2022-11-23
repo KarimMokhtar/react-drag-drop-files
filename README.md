@@ -69,7 +69,7 @@ export default DragDrop;
 | onSelect     | function         | function that will be called when the user selects file(s) on click the file area only                                | `(file) => console.log(file)`                             |
 | handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
 | onDraggingStateChange | function         | function that will be called with the state of dragging                                                    | `(dragging) => console.log(dragging)`                             |
-
+| dropMessageStyle | CSS Properties         | A CSS property to style the hover message                                                    | `{backgroundColor: 'red'}`                             |
 
 ## How to contribute:
   - Please follow the instructions inside this file: [here](CONTRIBUTION.md)
