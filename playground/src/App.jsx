@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileUploader } from 'react-drag-drop-files';
+import { FileUploader } from '../../';
 import './App.css';
 const fileTypes = ['JPG', 'PNG', 'GIF', 'JPEG'];
 
