@@ -31,8 +31,14 @@ export const UploaderWrapper = styled.label<any>`
       }
     }
   }
+  &:focus-within {
+    outline: 2px solid black;
+  }
   & > input {
-    display: none;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
   }
 `;
 /**

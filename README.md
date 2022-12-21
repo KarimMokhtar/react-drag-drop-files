@@ -55,6 +55,7 @@ export default DragDrop;
 | name         | string           | the name for your form (if exist)                                                                                   | `"myFile"`                                                |
 | multiple | boolean         | a boolean to determine whether the multiple files is enabled or not                                                    | `true OR false - false by default`                             |
 | label        | string           | the label (text) for your form (if exist) inside the uploading box - first word underlined                                                                                  | `"Upload or drop a file right here"`                      |
+| required     | boolean          | Conditionally set the input field as required | `true` or `false`|
 | disabled     | boolean          | this for disabled the input                                                                                         | `true OR false`                                           |
 | hoverTitle   | string           | text appears(hover) when trying to drop a file                                                                      | `"Drop here"`                                             |
 | fileOrFiles         | Array<File> or File or null     | this mainly made because if you would like to remove uploaded file(s) pass null or pass another file as initial        |
