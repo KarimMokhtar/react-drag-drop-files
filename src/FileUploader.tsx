@@ -23,6 +23,7 @@ type Props = {
   disabled?: boolean | false;
   label?: string | undefined;
   multiple?: boolean | false;
+  required?: boolean | false;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File | Array<File>) => void;
@@ -98,6 +99,7 @@ const drawDescription = (
     disabled,
     label,
     multiple,
+    required,
     onDraggingStateChange
   }
  * @returns JSX Element
@@ -120,6 +122,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     disabled,
     label,
     multiple,
+    required,
     onDraggingStateChange,
     dropMessageStyle
   } = props;
@@ -229,6 +232,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         name={name}
         disabled={disabled}
         multiple={multiple}
+        required={required}
       />
       {dragging && (
         <HoverMsg style={dropMessageStyle}>
