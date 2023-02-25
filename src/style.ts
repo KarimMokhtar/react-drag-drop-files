@@ -15,10 +15,7 @@ const defaultStyle = css`
   border-radius: 5px;
   cursor: pointer;
   flex-grow: 0;
-`;
-export const UploaderWrapper = styled.label<any>`
-  position: relative;
-  ${(props) => (props.overRide ? '' : defaultStyle)};
+
   &.is-disabled {
     border: dashed 2px ${darkGray};
     cursor: no-drop;
@@ -31,8 +28,18 @@ export const UploaderWrapper = styled.label<any>`
       }
     }
   }
+`;
+export const UploaderWrapper = styled.label<any>`
+  position: relative;
+  ${(props) => (props.overRide ? '' : defaultStyle)};
+  &:focus-within {
+    outline: 2px solid black;
+  }
   & > input {
-    display: none;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
   }
 `;
 /**
