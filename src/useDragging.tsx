@@ -5,7 +5,7 @@ type Params = {
   labelRef: any;
   inputRef: any;
   multiple?: boolean | false;
-  handleChanges: (arg0: Array<File>) => void;
+  handleChanges: (arg0: Array<File>) => any;
   onDrop?: (arg0: Array<File>) => void;
 };
 

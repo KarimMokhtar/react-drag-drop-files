@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import DrawTypes from '../src/DrawTypes';
 
 const types = ['PNG', 'JPG'];
