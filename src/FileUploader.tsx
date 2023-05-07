@@ -11,6 +11,16 @@ import DrawTypes from './DrawTypes';
 import ImageAdd from './ImageAdd';
 import useDragging from './useDragging';
 
+type MessagesTypes = {
+  disabled?: string
+  uploaded?: string
+  upload_another?: string
+  error?: string
+  drop?: string
+  upload?: string
+  or_message?: string
+}
+
 type Props = {
   name?: string;
   hoverTitle?: string;
@@ -22,8 +32,10 @@ type Props = {
   fileOrFiles?: Array<File> | File | null;
   disabled?: boolean | false;
   label?: string | undefined;
+  hideTypes: boolean
   multiple?: boolean | false;
   required?: boolean | false;
+  messages?: MessagesTypes;
   onSizeError?: (arg0: string) => void;
   onTypeError?: (arg0: string) => void;
   onDrop?: (arg0: File | Array<File>) => void;
@@ -50,14 +62,15 @@ const drawDescription = (
   uploaded: boolean,
   typeError: boolean,
   disabled: boolean | undefined,
-  label: string | undefined
+  label: string | undefined,
+  messages?: MessagesTypes
 ) => {
   return typeError ? (
-    <span>File type/size error, Hovered on types!</span>
+    <span>{messages?.error||'File type/size error, Hovered on types!'}</span>
   ) : (
     <Description>
       {disabled ? (
-        <span>Upload disabled</span>
+        <span>{messages?.disabled||'Upload disabled'}</span>
       ) : !currFile && !uploaded ? (
         <>
           {label ? (
@@ -67,13 +80,13 @@ const drawDescription = (
             </>
           ) : (
             <>
-              <span>Upload</span> or drop a file right here
+              <span>{messages?.upload||'Upload'}</span> {messages?.or_message||'or drop a file right here'}
             </>
           )}
         </>
       ) : (
         <>
-          <span>Uploaded Successfully!</span> Upload another?
+          <span>{messages?.uploaded||'Uploaded Successfully!'}</span> {messages?.upload_another||'Upload another?'}
         </>
       )}
     </Description>
@@ -98,6 +111,7 @@ const drawDescription = (
     onTypeError,
     disabled,
     label,
+    messages
     multiple,
     required,
     onDraggingStateChange
@@ -121,8 +135,10 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     onDrop,
     disabled,
     label,
+    hideTypes,
     multiple,
     required,
+    messages,
     onDraggingStateChange,
     dropMessageStyle
   } = props;
@@ -237,15 +253,15 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       />
       {dragging && (
         <HoverMsg style={dropMessageStyle}>
-          <span>{hoverTitle || 'Drop Here'}</span>
+          <span>{messages?.drop || hoverTitle || 'Drop Here'}</span>
         </HoverMsg>
       )}
       {!children && (
         <>
           <ImageAdd />
           <DescriptionWrapper error={error}>
-            {drawDescription(currFiles, uploaded, error, disabled, label)}
-            <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />
+            {drawDescription(currFiles, uploaded, error, disabled, label, messages)}
+            {!hideTypes && <DrawTypes types={types} minSize={minSize} maxSize={maxSize} />}
           </DescriptionWrapper>
         </>
       )}
