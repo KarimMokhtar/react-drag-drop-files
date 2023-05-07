@@ -57,6 +57,7 @@ export default DragDrop;
 | label        | string           | the label (text) for your form (if exist) inside the uploading box - first word underlined                                                                                  | `"Upload or drop a file right here"`                      |
 | required     | boolean          | Conditionally set the input field as required | `true` or `false`|
 | disabled     | boolean          | this for disabled the input                                                                                         | `true OR false`                                           |
+| hideTypes     | boolean          | set this to true to hide the UI showing types                                                                                         | `true OR false`                                           |
 | hoverTitle   | string           | text appears(hover) when trying to drop a file                                                                      | `"Drop here"`                                             |
 | fileOrFiles         | Array<File> or File or null     | this mainly made because if you would like to remove uploaded file(s) pass null or pass another file as initial        |
 | classes      | string           | string with the classes wished to add                                                                               | `"drop_area drop_zone"`                                   |
@@ -71,6 +72,7 @@ export default DragDrop;
 | handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
 | onDraggingStateChange | function         | function that will be called with the state of dragging                                                    | `(dragging) => console.log(dragging)`                             |
 | dropMessageStyle | CSS Properties         | A CSS property to style the hover message                                                    | `{backgroundColor: 'red'}`                             |
+| messages | object         | Object to change the static texts                                                    | `{disabled?: string, uploaded?: string,upload_another?: string, error?: string, drop?: string, upload?: string, or_message?: string}`                             |
 
 ## How to contribute:
   - Please follow the instructions inside this file: [here](CONTRIBUTION.md)
