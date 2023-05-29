@@ -31,6 +31,8 @@ type Props = {
   handleChange?: (arg0: File | Array<File> | File) => void;
   onDraggingStateChange?: (dragging: boolean) => void;
   dropMessageStyle?: React.CSSProperties | undefined;
+  ariaLabel?: string | undefined;
+  ariaDescribedby?: string | undefined;
 };
 /**
  *
@@ -124,7 +126,9 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
     multiple,
     required,
     onDraggingStateChange,
-    dropMessageStyle
+    dropMessageStyle,
+    ariaLabel,
+    ariaDescribedby
   } = props;
   const labelRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -223,6 +227,9 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       ref={labelRef}
       htmlFor={name}
       onClick={blockEvent}
+      aria-describedby={ariaDescribedby}
+      role="button"
+      aria-label={ariaLabel}
     >
       <input
         onClick={handleClick}
