@@ -55,6 +55,7 @@ export default DragDrop;
 | name         | string           | the name for your form (if exist)                                                                                   | `"myFile"`                                                |
 | multiple | boolean         | a boolean to determine whether the multiple files is enabled or not                                                    | `true OR false - false by default`                             |
 | label        | string           | the label (text) for your form (if exist) inside the uploading box - first word underlined                                                                                  | `"Upload or drop a file right here"`                      |
+| typeErrorLabel        | string           | the label (text) for the error message if a file doesn't meet the fileType requirements                        | `"That file type is not accepted"`    |
 | required     | boolean          | Conditionally set the input field as required | `true` or `false`|
 | disabled     | boolean          | this for disabled the input                                                                                         | `true OR false`                                           |
 | hoverTitle   | string           | text appears(hover) when trying to drop a file                                                                      | `"Drop here"`                                             |
