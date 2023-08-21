@@ -51,7 +51,7 @@ const drawDescription = (
   currFile: Array<File> | File | null,
   uploaded: boolean,
   typeError: boolean,
-  typeErrorLabel?: string
+  typeErrorLabel?: string,
   disabled: boolean | undefined,
   label: string | undefined
 ) => {
