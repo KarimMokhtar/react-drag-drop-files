@@ -71,6 +71,7 @@ export default DragDrop;
 | handleChange | function         | function that will be called when the user selects or drops file(s)                                                    | `(file) => console.log(file)`                             |
 | onDraggingStateChange | function         | function that will be called with the state of dragging                                                    | `(dragging) => console.log(dragging)`                             |
 | dropMessageStyle | CSS Properties         | A CSS property to style the hover message                                                    | `{backgroundColor: 'red'}`                             |
+| errorLabel         | string           | text appears if there is an error                                                                                   | `"File type/size error"`                                                |
 
 ## How to contribute:
   - Please follow the instructions inside this file: [here](CONTRIBUTION.md)
