@@ -50,12 +50,13 @@ export const HoverMsg = styled.div`
   border: dashed 2px ${darkGray};
   border-radius: 5px;
   background-color: ${lightGray};
-  opacity: 0.5;
+  opacity: 0.9;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
+  z-index: 999;
   & > span {
     position: absolute;
     top: 50%;
