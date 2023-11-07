@@ -230,6 +230,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
         accept={acceptedExt(types)}
         ref={inputRef}
         type="file"
+        id={name}
         name={name}
         disabled={disabled}
         multiple={multiple}
