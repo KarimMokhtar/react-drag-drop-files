@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "styled-components": "^5.3.0"
+    "styled-components": "^6.1.11"
   },
   "peerDependencies": {
     "react": "^18.0.0",
