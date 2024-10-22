@@ -1,6 +1,6 @@
 {
   "name": "react-drag-drop-files",
-  "version": "2.3.10",
+  "version": "2.3.11",
   "description": "Light React Drag & Drop files and images library styled by styled-components",
   "author": "Karim <karimmokhtar28@gmail.com>",
   "license": "MIT",
@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "styled-components": "^5.3.0"
+    "styled-components": "^6.1.11"
   },
   "peerDependencies": {
     "react": "^18.0.0",

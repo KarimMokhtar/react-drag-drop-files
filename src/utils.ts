@@ -6,7 +6,7 @@
  * @internal
  */
 export const getFileSizeMB = (size: number): number => {
-  return size / 1000 / 1000;
+  return size / 1024 / 1024;
 };
 
 /**
