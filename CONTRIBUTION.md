@@ -1,5 +1,7 @@
 # How to contribute:
+
 - Fork the repo
+- install the dependencies using `yarn install`, Make sure your node v. is `16`
 - Make your changes and create a PR
 - Make sure that you follow the "Semantic Commit Messages" below
 
