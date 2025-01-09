@@ -29,7 +29,9 @@ const defaultStyle = css`
     }
   }
 `;
-export const UploaderWrapper = styled.label<any>`
+export const UploaderWrapper =  styled.label.attrs<any>((props) => ({
+  overRide: undefined,
+}))<any>`
   position: relative;
   ${(props) => (props.overRide ? '' : defaultStyle)};
   &:focus-within {
