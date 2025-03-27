@@ -234,7 +234,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
 
   return (
     <UploaderWrapper
-      overRide={children}
+      override={children}
       className={`${classes || ''} ${disabled ? 'is-disabled' : ''}`}
       ref={labelRef}
       htmlFor={name}
