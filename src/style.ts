@@ -31,7 +31,7 @@ const defaultStyle = css`
 `;
 export const UploaderWrapper = styled.label<any>`
   position: relative;
-  ${(props) => (props.overRide ? '' : defaultStyle)};
+  ${(props) => (props.override ? '' : defaultStyle)};
   &:focus-within {
     outline: 2px solid black;
   }
