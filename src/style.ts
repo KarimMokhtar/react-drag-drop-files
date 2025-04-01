@@ -68,13 +68,13 @@ export const HoverMsg = styled.div`
  *
  * @internal
  */
-export const DescriptionWrapper = styled.div<{ error: boolean }>`
+export const DescriptionWrapper = styled.div<{ $error: boolean }>`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
   & > span {
     font-size: 12px;
-    color: ${(props) => (props.error ? 'red' : darkGray)};
+    color: ${(props) => (props.$error ? 'red' : darkGray)};
   }
   .file-types {
     overflow: hidden;
