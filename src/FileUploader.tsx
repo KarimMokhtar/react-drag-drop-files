@@ -263,7 +263,7 @@ const FileUploader: React.FC<Props> = (props: Props): JSX.Element => {
       {!children && (
         <>
           <ImageAdd />
-          <DescriptionWrapper error={error}>
+          <DescriptionWrapper $error={error}>
             {drawDescription(
               currFiles,
               uploaded,
