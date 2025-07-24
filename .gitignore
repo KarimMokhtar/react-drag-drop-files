@@ -11,7 +11,7 @@
 
 # production
 /build
-
+tsconfig.tsbuildinfo
 # misc
 .DS_Store
 .env.local
@@ -24,3 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 report*
+
+# rollup cache
+.rollup.cache
