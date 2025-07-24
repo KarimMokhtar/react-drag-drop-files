@@ -99,9 +99,6 @@ jobs:
           echo "Checking JavaScript bundles..."
           ls -la dist/*.js
 
-      - name: Build playground
-        run: cd playground && npm run build
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
