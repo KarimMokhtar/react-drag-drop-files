@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "composite": true,
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,13 +13,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
-    "jsx": "react-jsx",
-    "declaration": true,
-    "sourceMap": true,
-    "stripInternal": true,
-    "outDir": "./dist",
-    "declarationDir": "./dist"
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "files": ["src/react-drag-drop-files.d.ts"]
 }
