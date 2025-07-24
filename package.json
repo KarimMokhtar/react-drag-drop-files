@@ -30,7 +30,15 @@
     "deploy:npm": "yarn run build && npm publish",
     "lint:check": "eslint --ext .ts --ext .tsx .",
     "lint:fix": "eslint --fix --ext .ts --ext .tsx .",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
+    "security:audit": "yarn audit --audit-level moderate",
+    "ci": "yarn type-check && yarn lint:check && yarn format:check && yarn build",
+    "bundle-size": "echo 'Bundle sizes:' && ls -lh dist/*.js && echo 'TypeScript declarations:' && ls -lh dist/*.d.ts"
   },
   "eslintConfig": {
     "extends": [
