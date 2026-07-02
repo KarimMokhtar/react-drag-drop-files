@@ -10,5 +10,6 @@
 
 ### Check List
 
-- [ ] The changes to the "Readme" file(if needed)
-- [ ] The changes not breaking any old rule of the library or usage
+- [ ] Updates made to the "Readme" file (if needed)
+- [ ] Changes do not introduce any regressions
+- [ ] Changes do not break any old rule of the library
