@@ -9,6 +9,15 @@ Light and simple reactjs drag and drop files library to use with very flexible o
 
 ## Demo
 
+<img width="868" height="415" alt="react-drag-drop-files-screenshot" src="https://github.com/user-attachments/assets/e47b1850-f906-49d1-8618-8378956a2a8f" />
+
+> Initial/empty state
+
+<img width="871" height="318" alt="SCR-20260702-jedz" src="https://github.com/user-attachments/assets/e12b7836-6a9b-4c0f-9cd3-08e1495e60f4" />
+
+> File added
+
+
 [![Edit react-drag-drop-files](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-drag-drop-files-sghbp)
 
 ## Installation
